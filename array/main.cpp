@@ -89,7 +89,14 @@ for (i=0,j=length-1;i<j; i++,j--){
     A[j]=temp;
 };
     };
-};
+void Sinsert(int key){
+int i=length-1;
+while (A[i]>key){
+A[i+1]=A[i];
+i--;}
+A[i+1]=key;
+length++;
+}
 
 void display(struct Array arr){
 int i;
