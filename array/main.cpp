@@ -20,11 +20,19 @@ length++;
 }};
 void Delete(int index){
 if (index>=0 && index<length){
-    for (int i=index; i<length; i++){
+    for (int i=index; i<length-1; i++){
         A[i]=A[i+1];
     };
     length--;
 };
+};
+int lsearch(int key){
+    for (int i=0; i<length ; i++){
+        if (A[i]== key){
+            return i;
+        }
+    }
+    return -1;
 };
 };
 
@@ -49,7 +57,8 @@ int main()
     arr.Add(5);
     display(arr);
 
-arr.Delete(2);
+arr.Delete(0);
 display(arr);
+cout<<arr.lsearch(3);
     return 0;
 }
