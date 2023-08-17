@@ -5,17 +5,26 @@ struct Array {
 int *A;
 int size;
 int length;
-void add(int x){
+void Add(int x){
     if (length<size){
     A[length++]=x;
     };
 };
-void insert(int index, int x){
+void Insert(int index, int x){
+if (index>=0 && index<length){
 for (int i=length; i>index ; i--){
 A[i+1]=A[i];
 };
 A[index]=x;
 length++;
+}};
+void Delete(int index){
+if (index>=0 && index<length){
+    for (int i=index; i<length; i++){
+        A[i]=A[i+1];
+    };
+    length--;
+};
 };
 };
 
@@ -36,8 +45,11 @@ int main()
     x[2]=1;
     struct Array arr ={x,5,3};
     display(arr);
-    arr.insert(1,2);
-    arr.add(5);
+    arr.Insert(1,2);
+    arr.Add(5);
     display(arr);
+
+arr.Delete(2);
+display(arr);
     return 0;
 }
