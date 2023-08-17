@@ -1,4 +1,5 @@
 # depslib dependency file v1.0
-1692272761 source:b:\raed\desktop\xx\cpp\ds\array\array\main.cpp
+1692284433 source:b:\raed\desktop\xx\cpp\ds\array\array\main.cpp
 	<iostream>
+	<cmath>
 
