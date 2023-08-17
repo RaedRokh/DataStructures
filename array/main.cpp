@@ -25,7 +25,7 @@ if (index>=0 && index<length){
     length--;
 };
 };
-int lsearch(int key){
+int Lsearch(int key){
     for (int i=0; i<length ; i++){
         if (A[i]== key){
             swap(A[i],A[0]);
@@ -34,7 +34,7 @@ int lsearch(int key){
     }
     return -1;
 };
-int bsearch(int key){
+int Bsearch(int key){
     int high=length-1;
     int low=0;
     int mid;
@@ -51,6 +51,34 @@ int bsearch(int key){
 
     }
     return -1;
+}
+int Get(int index){
+    if (index <= length && index >=0){
+        return A[index];
+    }
+}
+void Set(int index, int key){
+    if (index <= length && index >=0){
+        A[index]=key;
+    }
+}
+int Max(){
+    int Max=A[0];
+    for (int i=1; i< length ; i++){
+        if (A[i]>Max){
+            Max=A[i];
+        }
+    }
+    return Max;
+}
+int Min(){
+    int Min=A[0];
+    for (int i=1; i< length ; i++){
+        if (A[i]<Min){
+            Min=A[i];
+        }
+    }
+    return Min;
 }
 };
 
@@ -69,7 +97,7 @@ int main()
     x[0]=1;
     x[1]=2;
     x[2]=3;
-    struct Array arr ={x,4,5};
-    cout<<arr.bsearch(2);
+    struct Array arr ={x,5,3};
+    cout<<arr.Min();
     return 0;
 }
