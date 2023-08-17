@@ -97,6 +97,25 @@ i--;}
 A[i+1]=key;
 length++;
 }
+bool isSorted(){
+    int i;
+    for (i=0;i<length-1;i++){
+        if (A[i]>A[i+1]){
+            return false;
+        }
+    }
+    return true;
+};
+void seperatesign(){
+    int i=0,j=length-1;
+    while(i<j){
+        while(A[i]<0){i++;};
+        while(A[j]>=0){j--;};
+        if (i<j){
+        swap(A[i],A[j]);}
+    };
+}
+};
 
 void display(struct Array arr){
 int i;
@@ -109,12 +128,13 @@ for(i=0; i<arr.length ; i++){
 
 int main()
 {
-    int *x=new int[3];
-    x[0]=1;
+    int *x=new int[4];
+    x[0]=-3;
     x[1]=2;
-    x[2]=3;
-    struct Array arr ={x,5,3};
-    arr.Reverse();
+    x[2]=-3;
+    x[3]=3;
+    struct Array arr ={x,5,4};
+    arr.seperatesign();
     display(arr);
     return 0;
 }
