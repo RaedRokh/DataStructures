@@ -56,6 +56,7 @@ int Get(int index){
     if (index <= length && index >=0){
         return A[index];
     }
+    return -1;
 }
 void Set(int index, int key){
     if (index <= length && index >=0){
@@ -80,6 +81,14 @@ int Min(){
     }
     return Min;
 }
+void Reverse(){
+    int temp,i,j;
+for (i=0,j=length-1;i<j; i++,j--){
+    temp=A[i];
+    A[i]=A[j];
+    A[j]=temp;
+};
+    };
 };
 
 void display(struct Array arr){
@@ -98,6 +107,7 @@ int main()
     x[1]=2;
     x[2]=3;
     struct Array arr ={x,5,3};
-    cout<<arr.Min();
+    arr.Reverse();
+    display(arr);
     return 0;
 }
