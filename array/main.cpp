@@ -1,18 +1,31 @@
 #include <iostream>
 using namespace std;
-struct Array {
+class Array {
+    private:
 int *A;
 int Size;
 int length;
+    public:
+        Array(){Size=10;
+        length=0;
+        A=new int[Size];}
+        Array(int s){
+            Size=s;
+            length=0;
+        A=new int[Size];
+        }
+        ~Array(){
+        delete []A;}
 void Add(int x){
     if (length<Size){
     A[length++]=x;
     };
 };
 void Insert(int index, int x){
-if (index>=0 && index<length){
+    cout<<length;
+if (index>=0 && index<=length){
 for (int i=length; i>index ; i--){
-A[i+1]=A[i];
+A[i]=A[i-1];
 };
 A[index]=x;
 length++;
@@ -115,54 +128,95 @@ void seperatesign(){
         swap(A[i],A[j]);}
     };
 }
-};
-
-void Display(struct Array arr){
+void Display(){
 int i;
 cout<<"elements are:"<<endl;
-for(i=0; i<arr.length ; i++){
-    cout<<arr.A[i]<<endl;
+for(i=0; i<length ; i++){
+    cout<<A[i]<<endl;
 };
 };
-struct Array *Merge(struct Array *a,struct Array *b){
+ Array *Merge(Array *b){
 int i=0,j=0,k=0;
-struct Array *c=new struct Array;
-c->length=a->length+b->length;
-c->Size=a->Size+b->Size;
-    while(i<a->length && j<b->length){
-        if (a->A[i]>b->A[j]){
+Array *c=new Array;
+c->length=this->length+b->length;
+c->Size=this->Size+b->Size;
+    while(i<this->length && j<b->length){
+        if (this->A[i]>b->A[j]){
                 c->A[k++]=b->A[j++];
             }
-            else{
-                 c->A[k++]=a->A[i++];
+            else if(this->A[i]<b->A[j]) {
+                 c->A[k++]=this->A[i++];
             }
+            else {
+                c->A[k++]=this->A[i++];
+                j++;}
         }
         for(;j<b->length;j++){
             c->A[k++]=b->A[j];
         }
-          for(;i<a->length;i++){
-            c->A[k++]=a->A[i];
+          for(;i<this->length;i++){
+            c->A[k++]=this->A[i];
         }
     return c;
 }
+};
+
+
+
 
 int main()
 {
-    int *x=new int[4];
-    x[0]=3;
-    x[1]=4;
-    x[2]=15;
-    x[3]=16;
-    int *y=new int[5];
-    y[0]=1;
-    y[1]=8;
-    y[2]=16;
-    y[3]=16;
-    y[4]=26;
-    struct Array arr ={x,5,4};
-    struct Array brr ={y,5,5};
-    struct Array *crr;
-    crr=Merge(&arr,&brr);
-    Display(*crr);
+   Array *arr1;
+ int ch,sz;
+ int x,index;
+
+ cout<<"Enter Size of Array";
+ cin>>sz;
+ arr1=new Array(sz);
+
+ do
+ {
+ cout<<"\n\nMenu\n";
+ cout<<"1. Add\n";
+ cout<<"2. Delete\n";
+ cout<<"3. Search\n";
+ cout<<"4. Reverse\n";
+  cout<<"5. Insert\n";
+ cout<<"6. Display\n";
+ cout<<"7.Exit\n";
+
+ cout<<"enter you choice ";
+ cin>>ch;
+
+ switch(ch)
+ {
+ case 1: cout<<"Enter an element" ;
+ cin>>x;
+ arr1->Add(x);
+ break;
+ case 2: cout<<"Enter index ";
+ cin>>index;
+ arr1->Delete(index);
+ cout<<"Deleted Element is"<<x;
+ break;
+ case 3:cout<<"Enter element to search";
+ cin>>x;
+ index=arr1->Lsearch(x);
+ cout<<"Element index "<<index;
+ break;
+ case 4:
+     arr1->Reverse();
+     cout<<"Reversed";
+     arr1->Display();
+ break;
+ case 5: cout<<"Enter element & index"<<endl;
+ int el,in;
+ cin>>el>>in;
+ arr1->Insert(in,el);
+ break;
+ case 6:arr1->Display();
+
+ }
+ }while(ch<7);
     return 0;
 }
