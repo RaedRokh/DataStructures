@@ -2,10 +2,10 @@
 using namespace std;
 struct Array {
 int *A;
-int size;
+int Size;
 int length;
 void Add(int x){
-    if (length<size){
+    if (length<Size){
     A[length++]=x;
     };
 };
@@ -117,24 +117,52 @@ void seperatesign(){
 }
 };
 
-void display(struct Array arr){
+void Display(struct Array arr){
 int i;
 cout<<"elements are:"<<endl;
 for(i=0; i<arr.length ; i++){
     cout<<arr.A[i]<<endl;
 };
+};
+struct Array *Merge(struct Array *a,struct Array *b){
+int i=0,j=0,k=0;
+struct Array *c=new struct Array;
+c->length=a->length+b->length;
+c->Size=a->Size+b->Size;
+    while(i<a->length && j<b->length){
+        if (a->A[i]>b->A[j]){
+                c->A[k++]=b->A[j++];
+            }
+            else{
+                 c->A[k++]=a->A[i++];
+            }
+        }
+        for(;j<b->length;j++){
+            c->A[k++]=b->A[j];
+        }
+          for(;i<a->length;i++){
+            c->A[k++]=a->A[i];
+        }
+    return c;
 }
-
 
 int main()
 {
     int *x=new int[4];
-    x[0]=-3;
-    x[1]=2;
-    x[2]=-3;
-    x[3]=3;
+    x[0]=3;
+    x[1]=4;
+    x[2]=15;
+    x[3]=16;
+    int *y=new int[5];
+    y[0]=1;
+    y[1]=8;
+    y[2]=16;
+    y[3]=16;
+    y[4]=26;
     struct Array arr ={x,5,4};
-    arr.seperatesign();
-    display(arr);
+    struct Array brr ={y,5,5};
+    struct Array *crr;
+    crr=Merge(&arr,&brr);
+    Display(*crr);
     return 0;
 }
