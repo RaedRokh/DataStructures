@@ -1,27 +1,29 @@
 #include <iostream>
 using namespace std;
+template <class T>
 class Array {
     private:
-int *A;
+T *A;
 int Size;
 int length;
     public:
-        Array(){Size=10;
+        Array(){
+        Size=10;
         length=0;
-        A=new int[Size];}
+        A=new T[Size];}
         Array(int s){
             Size=s;
             length=0;
-        A=new int[Size];
+        A=new T[Size];
         }
         ~Array(){
         delete []A;}
-void Add(int x){
+void Add(T x){
     if (length<Size){
     A[length++]=x;
     };
 };
-void Insert(int index, int x){
+void Insert(int index, T x){
     cout<<length;
 if (index>=0 && index<=length){
 for (int i=length; i>index ; i--){
@@ -38,7 +40,7 @@ if (index>=0 && index<length){
     length--;
 };
 };
-int Lsearch(int key){
+int Lsearch(T key){
     for (int i=0; i<length ; i++){
         if (A[i]== key){
             swap(A[i],A[0]);
@@ -47,7 +49,7 @@ int Lsearch(int key){
     }
     return -1;
 };
-int Bsearch(int key){
+int Bsearch(T key){
     int high=length-1;
     int low=0;
     int mid;
@@ -65,19 +67,19 @@ int Bsearch(int key){
     }
     return -1;
 }
-int Get(int index){
+T Get(int index){
     if (index <= length && index >=0){
         return A[index];
     }
     return -1;
 }
-void Set(int index, int key){
+void Set(int index, T key){
     if (index <= length && index >=0){
         A[index]=key;
     }
 }
-int Max(){
-    int Max=A[0];
+T Max(){
+    T Max=A[0];
     for (int i=1; i< length ; i++){
         if (A[i]>Max){
             Max=A[i];
@@ -85,8 +87,8 @@ int Max(){
     }
     return Max;
 }
-int Min(){
-    int Min=A[0];
+T Min(){
+    T Min=A[0];
     for (int i=1; i< length ; i++){
         if (A[i]<Min){
             Min=A[i];
@@ -95,14 +97,15 @@ int Min(){
     return Min;
 }
 void Reverse(){
-    int temp,i,j;
+    int i,j;
+    T temp;
 for (i=0,j=length-1;i<j; i++,j--){
     temp=A[i];
     A[i]=A[j];
     A[j]=temp;
 };
     };
-void Sinsert(int key){
+void Sinsert(T key){
 int i=length-1;
 while (A[i]>key){
 A[i+1]=A[i];
@@ -149,7 +152,7 @@ c->Size=this->Size+b->Size;
             }
             else {
                 c->A[k++]=this->A[i++];
-                j++;}
+                }
         }
         for(;j<b->length;j++){
             c->A[k++]=b->A[j];
@@ -166,13 +169,14 @@ c->Size=this->Size+b->Size;
 
 int main()
 {
-   Array *arr1;
+   Array<int> *arr1;
  int ch,sz;
- int x,index;
+int index;
+int x;
 
  cout<<"Enter Size of Array";
  cin>>sz;
- arr1=new Array(sz);
+ arr1=new Array<int>(sz);
 
  do
  {
@@ -191,6 +195,7 @@ int main()
  switch(ch)
  {
  case 1: cout<<"Enter an element" ;
+ cin.ignore();
  cin>>x;
  arr1->Add(x);
  break;
@@ -200,6 +205,7 @@ int main()
  cout<<"Deleted Element is"<<x;
  break;
  case 3:cout<<"Enter element to search";
+ cin.ignore();
  cin>>x;
  index=arr1->Lsearch(x);
  cout<<"Element index "<<index;
@@ -211,6 +217,7 @@ int main()
  break;
  case 5: cout<<"Enter element & index"<<endl;
  int el,in;
+ cin.ignore();
  cin>>el>>in;
  arr1->Insert(in,el);
  break;
