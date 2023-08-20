@@ -191,6 +191,15 @@ for (i=this->Min();i<brr->length;i++){
     }
 }
 }
+void findduplicatesorted(){
+int dup=0;
+for (int i=0;i<this->length-1;i++){
+    if (this->A[i]==this->A[i+1] && dup !=this->A[i]){
+        dup=this->A[i];
+        cout<<dup<<endl;
+    }
+}
+}
 };
 
 
@@ -218,7 +227,8 @@ int x;
   cout<<"6. Find missing elements sorted\n";
    cout<<"7. Find missing elements unsorted\n";
  cout<<"8. Display\n";
- cout<<"9.Exit\n";
+ cout<<"10.find duplicate element sorted\n";
+ cout<<"10.Exit\n";
 
  cout<<"enter you choice ";
  cin>>ch;
@@ -263,8 +273,9 @@ int x;
  case 8:
     arr1->Display();
  break;
-
+ case 9:
+    arr1->findduplicatesorted();
  }
- }while(ch<9);
+ }while(ch<10);
     return 0;
 }
