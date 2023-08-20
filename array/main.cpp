@@ -195,15 +195,17 @@ void findduplicatesorted(){
 int dup=0;
 int j;
 for (int i=0;i<this->length-1;i++){
-    if (this->A[i]==this->A[i+1] && dup !=this->A[i]){
+    if (this->A[i]==this->A[i+1]){
         dup=this->A[i];
-
-        j=i;
+        j=i+1;
         while(A[j]==A[i]){
             j++;
         }
         cout<<dup<<" is a duplicate number with "<<j-i<<" duplicates"<<endl;
+        i=j-1;
     }
+
+
 
 }
 }
@@ -232,7 +234,7 @@ int x;
     cout<<"4. Reverse\n";
     cout<<"5. Insert\n";
     cout<<"6. Find missing elements sorted\n";
-    count<<"7. Find missing elements unsorted\n";
+    cout<<"7. Find missing elements unsorted\n";
     cout<<"8. Display\n";
     cout<<"9.Count duplicate elements sorted\n";
     cout<<"10.Exit\n";
