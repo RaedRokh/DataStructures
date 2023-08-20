@@ -201,12 +201,23 @@ for (int i=0;i<this->length-1;i++){
         while(A[j]==A[i]){
             j++;
         }
-        cout<<dup<<" is a duplicate number with "<<j-i<<" duplicates"<<endl;
+        cout<<dup<<" is a duplicate element with "<<j-i<<" duplicates"<<endl;
         i=j-1;
+    }}
+}
+void findduplicateunsorted(){
+Array * brr=new Array();
+int i;
+for (i=0;i<this->Max();i++){
+    brr->A[i]=0;
+}
+for (i=0;i<this->length;i++){
+    brr->A[this->A[i]]++;
+}
+for (i=this->Min();i<brr->Size;i++){
+    if (brr->A[i]>1){
+        cout<<i<<" is a duplicate element with"<<brr->A[i]<< " duplicates"<<endl;
     }
-
-
-
 }
 }
 };
@@ -237,7 +248,8 @@ int x;
     cout<<"7. Find missing elements unsorted\n";
     cout<<"8. Display\n";
     cout<<"9.Count duplicate elements sorted\n";
-    cout<<"10.Exit\n";
+    cout<<"10.Count duplicate elements unsorted\n";
+    cout<<"11.Exit\n";
 
  cout<<"enter you choice ";
  cin>>ch;
@@ -284,7 +296,10 @@ int x;
  break;
  case 9:
     arr1->findduplicatesorted();
+    break;
+    case 10:
+        arr1->findduplicateunsorted();
  }
- }while(ch<10);
+ }while(ch<11);
     return 0;
 }
