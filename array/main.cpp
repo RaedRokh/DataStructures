@@ -193,11 +193,18 @@ for (i=this->Min();i<brr->length;i++){
 }
 void findduplicatesorted(){
 int dup=0;
+int j;
 for (int i=0;i<this->length-1;i++){
     if (this->A[i]==this->A[i+1] && dup !=this->A[i]){
         dup=this->A[i];
-        cout<<dup<<endl;
+
+        j=i;
+        while(A[j]==A[i]){
+            j++;
+        }
+        cout<<dup<<" is a duplicate number with "<<j-i<<" duplicates"<<endl;
     }
+
 }
 }
 };
@@ -218,17 +225,17 @@ int x;
 
  do
  {
- cout<<"\n\nMenu\n";
- cout<<"1. Add\n";
- cout<<"2. Delete\n";
- cout<<"3. Search\n";
- cout<<"4. Reverse\n";
-  cout<<"5. Insert\n";
-  cout<<"6. Find missing elements sorted\n";
-   cout<<"7. Find missing elements unsorted\n";
- cout<<"8. Display\n";
- cout<<"10.find duplicate element sorted\n";
- cout<<"10.Exit\n";
+    cout<<"\n\nMenu\n";
+    cout<<"1. Add\n";
+    cout<<"2. Delete\n";
+    cout<<"3. Search\n";
+    cout<<"4. Reverse\n";
+    cout<<"5. Insert\n";
+    cout<<"6. Find missing elements sorted\n";
+    count<<"7. Find missing elements unsorted\n";
+    cout<<"8. Display\n";
+    cout<<"9.Count duplicate elements sorted\n";
+    cout<<"10.Exit\n";
 
  cout<<"enter you choice ";
  cin>>ch;
