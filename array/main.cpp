@@ -221,7 +221,7 @@ for (i=this->Min();i<brr->Size;i++){
     }
 }
 }
-void findpair(int n){
+void findpairunsorted(int n){
 Array * brr=new Array(this->Max()+1);
 int i;
 for (i=0;i<brr->Size;i++){
@@ -232,12 +232,23 @@ for (i=0;i<this->length;i++){
 
     brr->A[this->A[i]]-=this->A[i];
 }
-brr->Display();
 for (i=this->Min();i<brr->Size;i++){
     if (brr->A[i]+brr->A[brr->A[i]]==n){
         cout<<"pairs are: ("<<brr->A[i]<<","<<brr->A[brr->A[i]]<<")"<<endl;
     }
 }
+}
+void findpairsorted(int n){
+int i=0,j=this->length-1;
+while(i<j){
+    if (this->A[i]+this->A[j]==n){
+        cout<<"pairs are: ("<<this->A[i]<<","<<this->A[j]<<")"<<endl;
+    }
+    else if(this->A[i]+this->A[j]>n){
+        j--;
+    }
+    else {i++;}
+    }
 }
 };
 
@@ -268,8 +279,9 @@ int x;
     cout<<"8. Display\n";
     cout<<"9.Count duplicate elements sorted\n";
     cout<<"10.Count duplicate elements unsorted\n";
-     cout<<"11.Find pair for sum\n";
-    cout<<"12.Exit\n";
+     cout<<"11.Find pair for sum unsorted\n";
+      cout<<"12.Find pair for sum sorted\n";
+    cout<<"13.Exit\n";
 
  cout<<"enter you choice ";
  cin>>ch;
@@ -324,9 +336,15 @@ int x;
         cout<<"Enter sum"<<endl;
         cin.ignore();
         cin>>in;
-        arr1->findpair(in);
+        arr1->findpairunsorted(in);
         break;
+     case 12:
+    cout<<"Enter sum"<<endl;
+    cin.ignore();
+    cin>>in;
+    arr1->findpairsorted(in);
+    break;
  }
- }while(ch<12);
+ }while(ch<13);
     return 0;
 }
