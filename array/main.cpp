@@ -243,6 +243,8 @@ int i=0,j=this->length-1;
 while(i<j){
     if (this->A[i]+this->A[j]==n){
         cout<<"pairs are: ("<<this->A[i]<<","<<this->A[j]<<")"<<endl;
+        i++;
+        j--;
     }
     else if(this->A[i]+this->A[j]>n){
         j--;
