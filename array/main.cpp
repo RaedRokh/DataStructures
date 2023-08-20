@@ -162,6 +162,18 @@ c->Size=this->Size+b->Size;
         }
     return c;
 }
+Array *findmissing(){
+Array *brr=new Array;
+int distance=this->A[0];
+int i;
+for (i=1;i<this->length;i++){
+    while(this->A[i]-i>distance){
+        brr->Add(distance+i);
+        distance++;
+    }
+
+}
+return brr;}
 };
 
 
@@ -186,8 +198,9 @@ int x;
  cout<<"3. Search\n";
  cout<<"4. Reverse\n";
   cout<<"5. Insert\n";
- cout<<"6. Display\n";
- cout<<"7.Exit\n";
+  cout<<"6. Find missing elements\n";
+ cout<<"7. Display\n";
+ cout<<"8.Exit\n";
 
  cout<<"enter you choice ";
  cin>>ch;
@@ -221,9 +234,16 @@ int x;
  cin>>el>>in;
  arr1->Insert(in,el);
  break;
- case 6:arr1->Display();
+ case 6:{
+     Array<int >* brr=new Array<int>;
+    brr=arr1->findmissing();
+    brr->Display();
+ break;}
+ case 7:
+    arr1->Display();
+ break;
 
  }
- }while(ch<7);
+ }while(ch<8);
     return 0;
 }
