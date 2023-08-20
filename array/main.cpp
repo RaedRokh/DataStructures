@@ -162,7 +162,7 @@ c->Size=this->Size+b->Size;
         }
     return c;
 }
-Array *findmissing(){
+Array *findmissingsorted(){
 Array *brr=new Array;
 int distance=this->A[0];
 int i;
@@ -173,7 +173,26 @@ for (i=1;i<this->length;i++){
     }
 
 }
-return brr;}
+return brr;
+}
+void findmissingunsorted(){
+
+Array *brr=new Array(this->Max());
+for (int i = 0; i < brr->Size; i++) {
+    brr->Add(0);
+}
+int i;
+for (i=0; i<this->length; i++){
+    brr->A[this->A[i]]=1;
+}
+i=0;
+while(brr->A[i]!=1){i++;}
+for (;i<brr->length;i++){
+    if (brr->A[i]==0){
+        cout<<i<<endl;
+    }
+}
+}
 };
 
 
@@ -198,9 +217,10 @@ int x;
  cout<<"3. Search\n";
  cout<<"4. Reverse\n";
   cout<<"5. Insert\n";
-  cout<<"6. Find missing elements\n";
- cout<<"7. Display\n";
- cout<<"8.Exit\n";
+  cout<<"6. Find missing elements sorted\n";
+   cout<<"7. Find missing elements unsorted\n";
+ cout<<"8. Display\n";
+ cout<<"9.Exit\n";
 
  cout<<"enter you choice ";
  cin>>ch;
@@ -236,14 +256,17 @@ int x;
  break;
  case 6:{
      Array<int >* brr=new Array<int>;
-    brr=arr1->findmissing();
+    brr=arr1->findmissingsorted();
     brr->Display();
  break;}
- case 7:
+  case 7:
+    arr1->findmissingunsorted();
+    break;
+ case 8:
     arr1->Display();
  break;
 
  }
- }while(ch<8);
+ }while(ch<9);
     return 0;
 }
