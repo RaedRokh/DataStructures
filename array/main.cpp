@@ -206,17 +206,36 @@ for (int i=0;i<this->length-1;i++){
     }}
 }
 void findduplicateunsorted(){
-Array * brr=new Array();
+Array * brr=new Array(this->Max()+1);
 int i;
-for (i=0;i<this->Max();i++){
-    brr->A[i]=0;
+for (i=0;i<=brr->Size;i++){
+    brr->Add(0);
 }
+
 for (i=0;i<this->length;i++){
     brr->A[this->A[i]]++;
 }
 for (i=this->Min();i<brr->Size;i++){
     if (brr->A[i]>1){
         cout<<i<<" is a duplicate element with"<<brr->A[i]<< " duplicates"<<endl;
+    }
+}
+}
+void findpair(int n){
+Array * brr=new Array(this->Max()+1);
+int i;
+for (i=0;i<brr->Size;i++){
+    brr->Add(n);
+}
+
+for (i=0;i<this->length;i++){
+
+    brr->A[this->A[i]]-=this->A[i];
+}
+brr->Display();
+for (i=this->Min();i<brr->Size;i++){
+    if (brr->A[i]+brr->A[brr->A[i]]==n){
+        cout<<"pairs are: ("<<brr->A[i]<<","<<brr->A[brr->A[i]]<<")"<<endl;
     }
 }
 }
@@ -249,7 +268,8 @@ int x;
     cout<<"8. Display\n";
     cout<<"9.Count duplicate elements sorted\n";
     cout<<"10.Count duplicate elements unsorted\n";
-    cout<<"11.Exit\n";
+     cout<<"11.Find pair for sum\n";
+    cout<<"12.Exit\n";
 
  cout<<"enter you choice ";
  cin>>ch;
@@ -299,7 +319,14 @@ int x;
     break;
     case 10:
         arr1->findduplicateunsorted();
+        break;
+    case 11:
+        cout<<"Enter sum"<<endl;
+        cin.ignore();
+        cin>>in;
+        arr1->findpair(in);
+        break;
  }
- }while(ch<11);
+ }while(ch<12);
     return 0;
 }
