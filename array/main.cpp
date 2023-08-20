@@ -183,11 +183,9 @@ for (int i = 0; i < brr->Size; i++) {
 }
 int i;
 for (i=0; i<this->length; i++){
-    brr->A[this->A[i]]=1;
+    brr->A[this->A[i]]++;
 }
-i=0;
-while(brr->A[i]!=1){i++;}
-for (;i<brr->length;i++){
+for (i=this->Min();i<brr->length;i++){
     if (brr->A[i]==0){
         cout<<i<<endl;
     }
