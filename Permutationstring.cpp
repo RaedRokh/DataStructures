@@ -20,7 +20,21 @@ for (int i=0;s[i]!='\0';i++){
 }
 
 }
+void permute2(char s[], int l, int h){
+    int i;
+    if (l==h){
+    cout<<s<<endl;
+}
+else {
+for (i=l; i<=h;i++){
+swap(s[l],s[i]);
+permute2(s,l+1,h);
+swap(s[l],s[i]);
+}
+}
+
+}
 int main(){
 char String[]={'a','b','c','\0'};
-permute(String,0);
+permute2(String,0,2);
 return 0;}
