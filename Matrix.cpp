@@ -39,16 +39,39 @@ for (i=1;i<=n;i++){
 }
 ~Diagonal(){delete []A;}
 };
-class Ltriangle{
-
-
+class Ltriangle: public Matrix{
+public:
+    Ltriangle(int n):Matrix(n){};
+    void Set(int i, int j,int x){
+    if (i>=j){
+        A[i*(i-1)/2+j-1]=x;
+    }
+};
+int Get(int i, int j){
+if (i>=j){
+    return A[i*(i-1)/2+j-1];
+}else return 0;}
+void Display(){
+int i,j;
+for (i=1; i<=n;i++){
+    for (j=1;j<=n;j++){
+        if (i>=j){
+            cout<<A[i*(i-1)/2+j-1];
+        }
+        else cout<<0;
+    }
+    cout<<endl;
+}}
 };
 int main(){
-Diagonal m(4);
-m.Set(1,1,1);
-m.Set(2,2,8);
-m.Set(3,3,9);
-m.Set(4,4,3);
+Ltriangle m(3);
+int x,i,j;
+for (i=1;i<=3;i++){
+    for (j=1;j<=3;j++){
+        cin>>x;
+        m.Set(i,j,x);
+    }
+}
 m.Display();
 return 0;
 }
