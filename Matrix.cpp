@@ -9,7 +9,9 @@ int n;
 A=new int[n];}
 virtual void Set(int i, int j, int x)=0;
 virtual int Get(int i, int j)=0;
-virtual void Display()=0;};
+virtual void Display()=0;
+~Matrix(){delete []A;}
+};
 
 class Diagonal: public Matrix{
 
@@ -37,7 +39,7 @@ for (i=1;i<=n;i++){
     cout<<endl;
 }
 }
-~Diagonal(){delete []A;}
+~Diagonal(){}
 };
 class Ltriangle: public Matrix{
 public:
@@ -62,6 +64,7 @@ for (i=1; i<=n;i++){
     }
     cout<<endl;
 }}
+~Ltriangle(){};
 };
 int main(){
 Ltriangle m(3);
