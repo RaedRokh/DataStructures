@@ -1,13 +1,20 @@
 #include <iostream>
 using namespace std;
-class dmatrix{
-private:
+class Matrix {
+    protected:
 int *A;
 int n;
-public:
-dmatrix(int n){
-this->n=n;
+    public:
+        Matrix(int n){this->n=n;
 A=new int[n];}
+virtual void Set(int i, int j, int x)=0;
+virtual int Get(int i, int j)=0;
+virtual void Display()=0;};
+
+class Diagonal: public Matrix{
+
+public:
+Diagonal(int n):Matrix(n){}
 void Set (int i, int j, int x){
 if (i==j){
     A[i-1]=x;
@@ -30,10 +37,14 @@ for (i=1;i<=n;i++){
     cout<<endl;
 }
 }
-~dmatrix(){delete []A;}
+~Diagonal(){delete []A;}
+};
+class Ltriangle{
+
+
 };
 int main(){
-dmatrix m(4);
+Diagonal m(4);
 m.Set(1,1,1);
 m.Set(2,2,8);
 m.Set(3,3,9);
