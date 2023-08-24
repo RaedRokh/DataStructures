@@ -15,7 +15,6 @@ for (int i=0;s[i]!='\0';i++){
         A[i]=1;
         permute(s,k+1);
         A[i]=0;
-
     }
 }
 
