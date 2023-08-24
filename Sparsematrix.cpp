@@ -13,16 +13,7 @@ int n;
 int num;
 element *e;
 public:
-void create(){
-cout<<"Enter dimensions & num of non zero elements"<<endl;
-cin>>n>>m>>num;
-e=new element [num];
-cout<<"Enter all non zero elements"<<endl;
-for (int i=0;i<num;i++){
-    cin>>e[i].i>>e[i].j>>e[i].x;
-}
-
-}
+friend istream & operator>>(istream & is, sparse &s );
 void Display(){
     int i,j,k=0;
 for (i=0;i<n;i++){
@@ -37,7 +28,9 @@ for (i=0;i<n;i++){
 }
 }
 sparse * add (sparse *b){
-
+if (this->m !=b->m || this->n!=b->n){
+    return NULL;
+}
 sparse *sum;
 sum=new sparse;
 sum->m=this->m;
@@ -73,15 +66,27 @@ sum->num=k;
 return sum;
 }
 
-
+~sparse(){
+delete []e;
+}
 };
+istream & operator>>(istream & is, sparse &s ){
+cout<<"Enter dimensions & num of non zero elements"<<endl;
+is>>s.n>>s.m>>s.num;
+s.e=new element [s.num];
+cout<<"Enter all non zero elements"<<endl;
+for (int i=0;i<s.num;i++){
+    is>>s.e[i].i>>s.e[i].j>>s.e[i].x;
+}
+return is;
+}
 
 int main(){
 sparse s;
-s.create();
+cin>>s;
 s.Display();
 sparse b;
-b.create();
+cin>>b;
 b.Display();
 cout<<"Result of addition is: "<<endl;
 sparse* c = s.add(&b);
