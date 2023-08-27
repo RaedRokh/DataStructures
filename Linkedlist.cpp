@@ -44,11 +44,18 @@ if (p==0){
 }
 return 1+Count(p->next);
 }
-
+int sum(node *p){
+int s=0;
+while (p){
+    s+=p->data;
+    p=p->next;
+}
+return s;}
 int main(){
 int A[]={1,2,3,5,4};
 create(A,5);
 //display(first);
 rdisplay(first);
-cout<<"LL's length is: "<<Count(first);
+cout<<"LL's length is: "<<Count(first)<<endl;
+cout<<"LL's sum is: "<<sum(first)<<endl;
 return 0;}
