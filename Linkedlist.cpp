@@ -51,11 +51,23 @@ while (p){
     p=p->next;
 }
 return s;}
+int Max(int currentmax,node *currentnode){
+if (currentnode->next==0){
+    return currentmax;
+}
+if (currentnode->data>currentmax){
+    return Max(currentnode->data,currentnode->next);
+}
+else return Max(currentmax,currentnode->next);
+}
 int main(){
-int A[]={1,2,3,5,4};
+int A[]={200,50,3,20,4};
 create(A,5);
 //display(first);
 rdisplay(first);
 cout<<"LL's length is: "<<Count(first)<<endl;
 cout<<"LL's sum is: "<<sum(first)<<endl;
+cout<<Max(0,first);
 return 0;}
+
+
