@@ -55,19 +55,27 @@ int Max(int currentmax,node *currentnode){
 if (currentnode->next==0){
     return currentmax;
 }
-if (currentnode->data>currentmax){
-    return Max(currentnode->data,currentnode->next);
+return currentnode->data>currentmax?Max(currentnode->data,currentnode->next):Max(currentmax,currentnode->next);
+
 }
-else return Max(currentmax,currentnode->next);
+node * Search(node *p, int key){
+if (p==0){
+    return nullptr;
+}
+if (p->data==key){
+    return p;
+}
+Search(p->next,key);
 }
 int main(){
-int A[]={200,50,3,20,4};
+int A[]={-200,-50,-3,-20,-4};
 create(A,5);
 //display(first);
 rdisplay(first);
 cout<<"LL's length is: "<<Count(first)<<endl;
 cout<<"LL's sum is: "<<sum(first)<<endl;
-cout<<Max(0,first);
+cout<<Max(INT_MIN,first)<<endl;
+cout<<Search(first,10)->data;
 return 0;}
 
 
