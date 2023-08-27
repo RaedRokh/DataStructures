@@ -81,14 +81,14 @@ while (p!=0){
 }
 }
 int main(){
-int A[]={-200,-50,-3,-20,-4};
+int A[]={-200,-50,-3,-20,0};
 create(A,5);
 //display(first);
 rdisplay(first);
 cout<<"LL's length is: "<<Count(first)<<endl;
 cout<<"LL's sum is: "<<sum(first)<<endl;
 cout<<Max(INT_MIN,first)<<endl;
-Search(first,-20);
+Search(first,-20)==0?cout<<"Key not found"<<endl:cout<<"Key found"<<endl;
 cout<<"Final LL is: "<<endl;
 rdisplay(first);
 return 0;}
