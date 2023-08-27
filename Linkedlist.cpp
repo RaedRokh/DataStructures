@@ -58,14 +58,27 @@ if (currentnode->next==0){
 return currentnode->data>currentmax?Max(currentnode->data,currentnode->next):Max(currentmax,currentnode->next);
 
 }
-node * Search(node *p, int key){
+node * rsearch(node *p, int key){
 if (p==0){
     return nullptr;
 }
 if (p->data==key){
     return p;
 }
-Search(p->next,key);
+rsearch(p->next,key);
+}
+int Search(node *p,int key){
+node *q=nullptr;
+while (p!=0){
+    if  (key==p->data){
+        cout<<p->data<<endl;
+        q->next=p->next;
+        p->next=first;
+        first=p;
+    }
+    q=p;
+    p=p->next;
+}
 }
 int main(){
 int A[]={-200,-50,-3,-20,-4};
@@ -75,7 +88,9 @@ rdisplay(first);
 cout<<"LL's length is: "<<Count(first)<<endl;
 cout<<"LL's sum is: "<<sum(first)<<endl;
 cout<<Max(INT_MIN,first)<<endl;
-cout<<Search(first,10)->data;
+Search(first,-20);
+cout<<"Final LL is: "<<endl;
+rdisplay(first);
 return 0;}
 
 
