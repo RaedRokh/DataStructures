@@ -31,7 +31,13 @@ while (p!=0){
 }}
 
 
+void displayr(node *p){
+if (p!=0){
+ cout<<p->data<<endl;
+ displayr(p->next);
+}
 
+}
 
 
 
@@ -39,5 +45,6 @@ while (p!=0){
 int main(){
 int A[]={1,2,3,5,4};
 create(A,5);
-display(first);
+//display(first);
+displayr(first);
 return 0;}
