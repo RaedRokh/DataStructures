@@ -80,6 +80,23 @@ while (p!=0){
     p=p->next;
 }
 }
+void Insert(int pos,int key){
+    node *temp=new node;
+    temp->data=key;
+    temp->next=nullptr;
+if (pos==0){
+    temp->next=first->next;
+    first=temp;
+}
+else {
+    node *p=first;
+    for (int i=0;i<pos-1 && p;i++){
+        p=p->next;
+    }
+    if (p){
+    temp->next=p->next;
+    p->next=temp;}
+}}
 int main(){
 int A[]={-200,-50,-3,-20,0};
 create(A,5);
@@ -90,6 +107,9 @@ cout<<"LL's sum is: "<<sum(first)<<endl;
 cout<<Max(INT_MIN,first)<<endl;
 Search(first,-20)==0?cout<<"Key not found"<<endl:cout<<"Key found"<<endl;
 cout<<"Final LL is: "<<endl;
+rdisplay(first);
+Insert(20,3);
+cout<<"LL after insertion is: "<<endl;
 rdisplay(first);
 return 0;}
 
