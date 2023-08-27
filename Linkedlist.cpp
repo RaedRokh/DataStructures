@@ -31,20 +31,24 @@ while (p!=0){
 }}
 
 
-void displayr(node *p){
+void rdisplay(node *p){
 if (p!=0){
- cout<<p->data<<endl;
- displayr(p->next);
+    cout<<p->data<<endl;
+    rdisplay(p->next);
 }
 
 }
-
-
-
+int Count(node *p){
+if (p==0){
+    return 0;
+}
+return 1+Count(p->next);
+}
 
 int main(){
 int A[]={1,2,3,5,4};
 create(A,5);
 //display(first);
-displayr(first);
+rdisplay(first);
+cout<<"LL's length is: "<<Count(first);
 return 0;}
