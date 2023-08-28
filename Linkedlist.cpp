@@ -149,12 +149,21 @@ else {
     delete p;
 }
 }
+bool isSorted(node *p){
+if (p==0 || p->next==0){
+    return 1;
+}
+while (p->data<p->next->data && p->next->next){
+       p=p->next;}
+if (p->data<p->next->data){
+    return true;
+}
+else return false;}
 int main(){
-InsertSorted(1);
-InsertSorted(6);
-InsertSorted(3);
-Delete(0);
-display(first);
+InsertLast(1);
+InsertLast(2);
+InsertLast(1);
+cout<<isSorted(first)<<endl;
 //int A[]={-200,-50,-3,-20,0};
 //create(A,5);
 //display(first);
