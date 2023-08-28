@@ -114,6 +114,10 @@ void InsertSorted(int key){
 node * temp=new node;
 temp->data=key;
 temp->next=nullptr;
+if (first==0){
+    first=temp;
+    return;
+}
 if (key<first->data){
     temp->next=first;
     first=temp;
@@ -127,13 +131,29 @@ while (p && p->data<key){
 q->next=temp;
 temp->next=p;
 }}
+
+
+void Delete(int pos){
+if (pos==0){
+        node *p=first;
+        first=first->next;
+        delete p;
+    }
+else {
+    node *p=first,*q;
+    for (int i=0; i<pos && p;i++){
+        q=p;
+        p=p->next;
+    }
+    q->next=p->next;
+    delete p;
+}
+}
 int main(){
-InsertLast(1);
-InsertLast(2);
-InsertLast(4);
-InsertLast(5);
-display(first);
+InsertSorted(1);
 InsertSorted(6);
+InsertSorted(3);
+Delete(0);
 display(first);
 //int A[]={-200,-50,-3,-20,0};
 //create(A,5);
