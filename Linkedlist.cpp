@@ -173,13 +173,24 @@ void DeleteDupSorted(){
         }
     }
 }
+
+void Reverse(){
+node *r=0,*q=0;
+node *p=first;
+while (p){
+    r=q;
+    q=p;
+    p=p->next;
+    q->next=r;
+}
+first=q;
+}
 int main(){
 InsertLast(1);
-InsertLast(1);
 InsertLast(2);
-InsertLast(3);
-InsertLast(3);
-DeleteDupSorted();
+//InsertLast(3);
+//InsertLast(4);
+Reverse();
 //int A[]={-200,-50,-3,-20,0};
 //create(A,5);
 display(first);
