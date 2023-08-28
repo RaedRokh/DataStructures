@@ -8,21 +8,22 @@ class node{
     int data;
     node *next;};
 node *first=0;
+node* first2=0;
 node*last=0;
-void create(int A[],int n){
-
+node* create(int A[],int n){
 int i;
 node *t,*last;
-first=new node;
-first->data=A[0];
-first->next=0;
-last=first;
+node *f=new node;
+f->data=A[0];
+f->next=0;
+last=f;
 for (i=1;i<n;i++){
 t=new node;
 t->data=A[i];
 t->next=0;
 last->next=t;
-last=t;}}
+last=t;}
+return f;}
 
 void display(node *p){
 while (p!=0){
@@ -98,12 +99,12 @@ else {
     temp->next=p->next;
     p->next=temp;}
 }}
-void InsertLast(int key){
+void InsertLast(node * f,int key){
 node * temp=new node;
 temp->data=key;
 temp->next=nullptr;
-if (first==0){
-    first=last=temp;
+if (f==0){
+    f=last=temp;
 }
 else {
     last->next=temp;
@@ -192,15 +193,62 @@ p->next=q;
 }
 else {first=q;}
 }
+void concatenate(node* f, node * f2){
+node*p=f;
+while (p->next){
+    p=p->next;
+}
+p->next=f2;
+f2=0;
+}
+node* MergeSorted(node*f,node *f2){
+node *third=0, *last=0;
+if (f->data<f2->data){
+        third=f;
+        last=f;
+        f=f->next;
+        last->next=0;}
+else {third=f2;
+        last=f2;
+        f2=f2->next;
+        last->next=0;}
+while (f && f2){
+    if (f->data<f2->data){
+        last->next=f;
+        last=f;
+        f=f->next;
+        last->next=0;
+    }
+    else if (f->data>f2->data) {
+        last->next=f2;
+        last=f2;
+        f2=f2->next;
+        last->next=0;
+    }
+    else{last->next=f2;
+        last=f2;
+        f2=f2->next;
+        f=f->next;
+        last->next=0;}
+}
+if (f){
+    last->next=f;
+}
+if (f2){
+    last->next=f2;
+}
+return third;
+}
 int main(){
-InsertLast(1);
-InsertLast(2);
-InsertLast(3);
-//InsertLast(3);
-//InsertLast(4);
-ReverseR(0,first);
-//int A[]={-200,-50,-3,-20,0};
-//create(A,5);
+
+//InsertLast(first2,3);
+//InsertLast(first2,4);
+//ReverseR(0,first);
+int A[]={1,3,4,5,7};
+int B[]={2,6,8};
+first=create(A,5);
+first2=create(B,3);
+concatenate(first,first2);
 display(first);
 //rdisplay(first);
 //cout<<"LL's length is: "<<Count(first)<<endl;
