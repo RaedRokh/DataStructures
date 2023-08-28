@@ -8,6 +8,7 @@ class node{
     int data;
     node *next;};
 node *first=0;
+node*last=0;
 void create(int A[],int n){
 
 int i;
@@ -97,20 +98,56 @@ else {
     temp->next=p->next;
     p->next=temp;}
 }}
+void InsertLast(int key){
+node * temp=new node;
+temp->data=key;
+temp->next=nullptr;
+if (first==0){
+    first=last=temp;
+}
+else {
+    last->next=temp;
+    last=temp;
+}
+}
+void InsertSorted(int key){
+node * temp=new node;
+temp->data=key;
+temp->next=nullptr;
+if (key<first->data){
+    temp->next=first;
+    first=temp;
+}
+else {
+node *p=first,*q;
+while (p && p->data<key){
+    q=p;
+    p=p->next;
+}
+q->next=temp;
+temp->next=p;
+}}
 int main(){
-int A[]={-200,-50,-3,-20,0};
-create(A,5);
+InsertLast(1);
+InsertLast(2);
+InsertLast(4);
+InsertLast(5);
+display(first);
+InsertSorted(6);
+display(first);
+//int A[]={-200,-50,-3,-20,0};
+//create(A,5);
 //display(first);
-rdisplay(first);
-cout<<"LL's length is: "<<Count(first)<<endl;
-cout<<"LL's sum is: "<<sum(first)<<endl;
-cout<<Max(INT_MIN,first)<<endl;
-Search(first,-20)==0?cout<<"Key not found"<<endl:cout<<"Key found"<<endl;
-cout<<"Final LL is: "<<endl;
-rdisplay(first);
-Insert(20,3);
-cout<<"LL after insertion is: "<<endl;
-rdisplay(first);
+//rdisplay(first);
+//cout<<"LL's length is: "<<Count(first)<<endl;
+//cout<<"LL's sum is: "<<sum(first)<<endl;
+//cout<<Max(INT_MIN,first)<<endl;
+//Search(first,-20)==0?cout<<"Key not found"<<endl:cout<<"Key found"<<endl;
+//cout<<"Final LL is: "<<endl;
+//rdisplay(first);
+//Insert(20,3);
+//cout<<"LL after insertion is: "<<endl;
+//rdisplay(first);
 return 0;}
 
 
