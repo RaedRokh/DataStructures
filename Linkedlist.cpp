@@ -185,12 +185,20 @@ while (p){
 }
 first=q;
 }
+void ReverseR(node*q,node* p){
+if (p){
+ReverseR(p,p->next);
+p->next=q;
+}
+else {first=q;}
+}
 int main(){
 InsertLast(1);
 InsertLast(2);
+InsertLast(3);
 //InsertLast(3);
 //InsertLast(4);
-Reverse();
+ReverseR(0,first);
 //int A[]={-200,-50,-3,-20,0};
 //create(A,5);
 display(first);
