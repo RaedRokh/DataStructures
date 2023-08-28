@@ -159,14 +159,30 @@ if (p->data<p->next->data){
     return true;
 }
 else return false;}
+void DeleteDupSorted(){
+    node*p=first,*q=p->next;
+    while (q){
+        if (p->data!=q->data){
+            p=q;
+            q=q->next;
+        }
+        else {
+            p->next=q->next;
+            delete q;
+            q=p->next;
+        }
+    }
+}
 int main(){
 InsertLast(1);
-InsertLast(2);
 InsertLast(1);
-cout<<isSorted(first)<<endl;
+InsertLast(2);
+InsertLast(3);
+InsertLast(3);
+DeleteDupSorted();
 //int A[]={-200,-50,-3,-20,0};
 //create(A,5);
-//display(first);
+display(first);
 //rdisplay(first);
 //cout<<"LL's length is: "<<Count(first)<<endl;
 //cout<<"LL's sum is: "<<sum(first)<<endl;
