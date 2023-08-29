@@ -239,27 +239,29 @@ if (f2){
 }
 return third;
 }
+bool isLoop(node* f){
+node*a=f,*b=f;
+do {
+    a=a->next;
+    b=b->next;
+    b=(b?b->next:0);
+} while (a && b && a!=b);
+if (a==b){
+    return true;
+}
+else return false;
+
+}
 int main(){
 
-//InsertLast(first2,3);
-//InsertLast(first2,4);
-//ReverseR(0,first);
 int A[]={1,3,4,5,7};
-int B[]={2,6,8};
 first=create(A,5);
-first2=create(B,3);
-concatenate(first,first2);
-display(first);
-//rdisplay(first);
-//cout<<"LL's length is: "<<Count(first)<<endl;
-//cout<<"LL's sum is: "<<sum(first)<<endl;
-//cout<<Max(INT_MIN,first)<<endl;
-//Search(first,-20)==0?cout<<"Key not found"<<endl:cout<<"Key found"<<endl;
-//cout<<"Final LL is: "<<endl;
-//rdisplay(first);
-//Insert(20,3);
-//cout<<"LL after insertion is: "<<endl;
-//rdisplay(first);
+node *t1=first->next->next->next->next;
+node *t2=first->next->next;
+t1->next=t2;
+cout<<isLoop(first);
+
+
 return 0;}
 
 
