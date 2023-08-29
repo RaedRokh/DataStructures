@@ -15,16 +15,19 @@ public:
     void display();
     int length();
     void Insert(int pos,int key);
-    void Delete(int pos);
+    int Delete(int pos);
 };
-void DoublyLL::Delete(int pos){
-    node *p=first;
+int DoublyLL::Delete(int pos){
+if (pos<0 || pos>this->length()-1) return -1;
+node *p=first;
+int x;
 if (pos==0){
 
     first=first->next;
     if (first->next){
         first->next->prev=0;
     }
+    x=p->data;
     delete p;
 }
 else {
@@ -33,12 +36,13 @@ else {
         q=p;
         p=p->next;
     }
+    x=p->data;
     q->next=p->next;
     if (p->next){
     p->next->prev=q;}
     delete p;
 }
-
+return x;
 }
 void DoublyLL::Insert(int pos,int key){
 if (pos<0 || pos>this->length()-1){
@@ -102,7 +106,6 @@ return i;}
 int main(){
 int A[]={1,3,4,5,7};
 DoublyLL *L=new DoublyLL(A,5);
-L->Delete(6);
-L->display();
+cout<<"Deleted element is: "<<L->Delete(4)<<endl;
 
 return 0;}
