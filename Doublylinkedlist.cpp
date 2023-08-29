@@ -13,6 +13,7 @@ public:
     DoubleLL();
     DoublyLL(int A[],int n);
     void display();
+    int length();
 };
 DoublyLL::DoublyLL(int A[],int n){
 
@@ -38,10 +39,19 @@ while (p!=0){
         p=p->next;
 }
 }
+int DoublyLL::length(){
+    node* p=first;
+    int i=0;
+while (p!=0){
+        i++;
+        p=p->next;
+}
+return i;}
 int main(){
 int A[]={1,3,4,5,7};
 DoublyLL *L=new DoublyLL(A,5);
 L->display();
+cout<<L->length();
 
 
 return 0;}
