@@ -16,7 +16,22 @@ public:
     int length();
     void Insert(int pos,int key);
     int Delete(int pos);
+    void Reverse();
 };
+void DoublyLL::Reverse(){
+node *p=first;
+node *t;
+while (p){
+    t=p->next;
+    p->next=p->prev;
+    p->prev=t;
+    p=p->prev;
+    if (p && !p->next){
+    first=p;
+}
+}
+
+}
 int DoublyLL::Delete(int pos){
 if (pos<0 || pos>this->length()-1) return -1;
 node *p=first;
@@ -106,6 +121,7 @@ return i;}
 int main(){
 int A[]={1,3,4,5,7};
 DoublyLL *L=new DoublyLL(A,5);
-cout<<"Deleted element is: "<<L->Delete(4)<<endl;
+L->Reverse();
+L->display();
 
 return 0;}
