@@ -7,6 +7,7 @@ class node{
     public:
     int data;
     node *next;};
+
 node *first=0;
 node* first2=0;
 node*last=0;
@@ -246,20 +247,32 @@ do {
     b=b->next;
     b=(b?b->next:0);
 } while (a && b && a!=b);
-if (a==b){
-    return true;
-}
-else return false;
 
+return (a==b?true:false);
+
+}
+void displayc(node *p){
+static int flag=0;
+if (p!=first || flag==0){
+        flag=1;
+    cout<<p->data;
+    display(p->next);
+
+}
+flag=0;
 }
 int main(){
 
 int A[]={1,3,4,5,7};
 first=create(A,5);
 node *t1=first->next->next->next->next;
-node *t2=first->next->next;
-t1->next=t2;
-cout<<isLoop(first);
+t1->next=first;
+
+node*p=first;
+if (isLoop(first)){
+displayc(first);
+}
+
 
 
 return 0;}
