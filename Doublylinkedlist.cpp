@@ -14,7 +14,30 @@ public:
     DoublyLL(int A[],int n);
     void display();
     int length();
+    void Insert(int pos,int key);
 };
+void DoublyLL::Insert(int pos,int key){
+if (first==0){
+    first->data=key;
+}
+node *t=new node;
+t->data=key;
+if (pos==0){
+    t->prev=0;
+    t->next=first;
+    first->prev=t;
+    first=t;
+}
+else {
+    node *p=first;
+    for (int i=0;i<pos-1;i++){
+        p=p->next;
+    }
+    t->next=p->next;
+    t->prev=p;
+    p->next=t;
+}
+}
 DoublyLL::DoublyLL(int A[],int n){
 
     node *t,*last;
@@ -50,8 +73,7 @@ return i;}
 int main(){
 int A[]={1,3,4,5,7};
 DoublyLL *L=new DoublyLL(A,5);
+L->Insert(5,2);
 L->display();
-cout<<L->length();
-
 
 return 0;}
