@@ -36,6 +36,8 @@ else {
     t->next=p->next;
     t->prev=p;
     p->next=t;
+    if (p->next){
+    p->next->prev=t;}
 }
 }
 DoublyLL::DoublyLL(int A[],int n){
