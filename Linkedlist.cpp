@@ -70,7 +70,7 @@ if (p->data==key){
 }
 rsearch(p->next,key);
 }
-int Search(node *p,int key){
+void Search(node *p,int key){
 node *q=nullptr;
 while (p!=0){
     if  (key==p->data){
@@ -261,17 +261,23 @@ if (p!=first || flag==0){
 }
 flag=0;
 }
+int findmiddle(node*p){
+
+node*a=p,*b=p;
+while(b){
+    b=b->next;
+    if (b) b=b->next;
+    if (b) a=a->next;
+}
+return a->data;
+
+}
 int main(){
 
 int A[]={1,3,4,5,7};
 first=create(A,5);
-node *t1=first->next->next->next->next;
-t1->next=first;
+cout<<findmiddle(first);
 
-node*p=first;
-if (isLoop(first)){
-displayc(first);
-}
 
 
 
