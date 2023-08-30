@@ -24,9 +24,43 @@ node** matrix;
 }
       void display();
         void Insert(int row,node * a);
-        void add(sparse* b);
+        sparse* add(sparse* b);
 
 };
+sparse* sparse::add(sparse* b){
+    sparse * r=new sparse(this->row,this->col);
+
+    for (int i=0;i<this->row;i++){
+        node *s=r->matrix[i];
+        node *temp=new node(0,0);
+        node*p=this->matrix[i],*q=b->matrix[i];
+    while(p && q){
+            if (p->col<q->col){
+                temp=p;
+                p=p->next;
+            }
+            else if (p->col>q->col){
+                 temp=q;
+                q=p->next;
+            }
+            else {temp=q;
+            temp->val+=p->val;
+            q=q->next;
+            p=p->next;}
+    }
+    while (p){
+        temp=p;
+        p=p->next;
+    }
+        while (q){
+        temp=q;
+        q=q->next;
+    }
+        s->next=temp;
+        s=s->next;
+    }
+    return r;
+}
 void sparse::display(){
 node *p;
 for (int i=0;i<row;i++){
@@ -40,6 +74,7 @@ for (int i=0;i<row;i++){
         cout<<endl;
 }
 }
+
 void sparse::Insert(int row,node *a){
     node *p=matrix[row];
     if (!p){
@@ -80,5 +115,7 @@ for (int i=0;i<r;i++){
     };
 }
 m->display();
-
+sparse *n=new sparse(r,c);
+n=m->add(m);
+n->display();
 return 0;}
