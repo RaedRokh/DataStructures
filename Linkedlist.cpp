@@ -277,10 +277,6 @@ int main(){
 int A[]={1,3,4,5,7};
 first=create(A,5);
 cout<<findmiddle(first);
-
-
-
-
 return 0;}
 
 
