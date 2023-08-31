@@ -3,56 +3,52 @@
 using namespace std;
 
 class node {
-public:
+  public:
     int val;
     int col;
     node * next=0;
-    node(int col,int val)
-    {
+    node(int col,int val) {
         this->col=col;
         this->val=val;
+        this->next=0;
     }
 };
 class sparse {
-private:
+  private:
     int row;
     int col;
     node** matrix;
-public:
-    sparse(int row,int col)
-    {
+  public:
+    sparse(int row,int col) {
         this->row=row;
         this->col=col;
         matrix = new node*[row];
+        for (int i=0;i<row;i++){
+            matrix[i]=new node(0,0);
+        }
     }
     void display();
     void Insert(int row,node * a);
     sparse* add(sparse* b);
 
 };
-sparse* sparse::add(sparse* b)
-{
+sparse* sparse::add(sparse* b) {
     sparse * r=new sparse(this->row,this->col);
     for (int i=0; i<this->row; i++) {
-        node *s=0;
         node*p=this->matrix[i];
         node*q=b->matrix[i];
+        node *s =new node(0,0);
+        r->matrix[i]=s;
         while(p && q) {
-            if (s==0) {
-                s=new node(0,0);
-                r->matrix[i]=s;
-            }
             if (p->col<q->col) {
                 s->col=p->col;
                 s->val=p->val;
                 p=p->next;
-            }
-            else if (p->col>q->col) {
+            } else if (p->col>q->col) {
                 s->col=q->col;
                 s->val=q->val;
                 q=q->next;
-            }
-            else {
+            } else {
                 s->col=q->col;
                 s->val=q->val+p->val;
                 q=q->next;
@@ -64,24 +60,23 @@ sparse* sparse::add(sparse* b)
             }
         }
         while (p) {
+            s->val=p->val;
+            s->col=p->col;
             s->next=new node(0,0);
-            s->next->val=p->val;
-            s->next->col=p->col;
             s=s->next;
             p=p->next;
         }
         while (q) {
+            s->val=q->val;
+            s->col=q->col;
             s->next=new node(0,0);
-            s->next->val=q->val;
-            s->next->col=q->col;
             s=s->next;
             q=q->next;
         }
     }
     return r;
 }
-void sparse::display()
-{
+void sparse::display() {
     node *p;
     for (int i=0; i<row; i++) {
         p=matrix[i];
@@ -89,24 +84,20 @@ void sparse::display()
             if (p && j==p->col) {
                 cout<<p->val;
                 p=p->next;
-            }
-            else cout<<0;
+            } else cout<<0;
         }
         cout<<endl;
     }
 }
 
-void sparse::Insert(int row,node *a)
-{
+void sparse::Insert(int row,node *a) {
     node *p=matrix[row];
     if (!p) {
         matrix[row]=a;
-    }
-    else if (a->col==0 || p->col>a->col) {
+    } else if (a->col==0 || p->col>a->col) {
         a->next=p;
         matrix[row]=a;
-    }
-    else {
+    } else {
         while (p->next && p->next->col<a->col) {
             p=p->next;
         }
@@ -115,8 +106,7 @@ void sparse::Insert(int row,node *a)
     }
 
 }
-int main()
-{
+int main() {
 
     int r,c,col,val,j,x;
     cout<<"Enter number of rows & cols";
@@ -135,8 +125,7 @@ int main()
                 a=new node(col,val);
                 m->Insert(i,a);
                 j++;
-            }
-            else {
+            } else {
                 break;
             }
         };
