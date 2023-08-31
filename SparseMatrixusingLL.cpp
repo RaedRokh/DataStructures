@@ -130,8 +130,9 @@ int main() {
             }
         };
     }
-    sparse *n=new sparse(r,c);
-    n=m->add(m);
-    n->display();
+    m->display();
+//    sparse *n=new sparse(r,c);
+//    n=m->add(m);
+//    n->display();
     return 0;
 }
