@@ -24,7 +24,7 @@ class sparse {
         this->col=col;
         matrix = new node*[row];
         for (int i=0; i<row; i++) {
-            matrix[i]=new node(0,0);
+            matrix[i]=0;
         }
     }
     void display();
@@ -131,8 +131,8 @@ int main() {
         };
     }
     m->display();
-//    sparse *n=new sparse(r,c);
-//    n=m->add(m);
-//    n->display();
+    sparse *n=new sparse(r,c);
+    n=m->add(m);
+    n->display();
     return 0;
 }
