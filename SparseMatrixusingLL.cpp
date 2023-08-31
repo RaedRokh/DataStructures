@@ -23,7 +23,7 @@ class sparse {
         this->row=row;
         this->col=col;
         matrix = new node*[row];
-        for (int i=0;i<row;i++){
+        for (int i=0; i<row; i++) {
             matrix[i]=new node(0,0);
         }
     }
@@ -91,7 +91,7 @@ void sparse::display() {
 }
 
 void sparse::Insert(int row,node *a) {
-    node *p=matrix[row];
+    node * p=matrix[row];
     if (!p) {
         matrix[row]=a;
     } else if (a->col==0 || p->col>a->col) {
