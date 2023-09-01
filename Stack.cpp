@@ -69,12 +69,12 @@ int main() {
 //int s;
 //cout<<"Enter stack size :"<<endl;
 //cin>>s;
-    Stack *st=new Stack(5);
-    st->push(1);
-    st->push(2);
-    st->push(3);
-    cout<<st->StackTop()<<endl;
-    cout<<st->Peek(3);
+//    Stack *st=new Stack(5);
+//    st->push(1);
+//    st->push(2);
+//    st->push(3);
+//    cout<<st->StackTop()<<endl;
+//    cout<<st->Peek(3);
 
 
     return 0;

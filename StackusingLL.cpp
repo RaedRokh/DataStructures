@@ -1,26 +1,27 @@
 #include <iostream>
 using namespace std;
-
+template <class T>
 class node {
   public:
-    int data;
+    T data;
     node * next=0;
 };
-
+template <class T>
 class Stack {
   private:
-    node * top;
+    node<T> * top;
   public:
     Stack() {
         top=0;
     }
-    void push(int val);
-    int pop();
+    void push(T val);
+    T pop();
     void display();
-    int peek(int pos);
+    T peek(int pos);
 };
-void Stack::push(int val) {
-    node *t=new node;
+template <class T>
+void Stack<T>::push(T val) {
+    node<T> *t=new node<T>;
     if (!t) {
         cout<<"Stack overflow"<<endl;
     } else {
@@ -29,44 +30,44 @@ void Stack::push(int val) {
         top=t;
     }
 }
-int Stack::pop() {
-    int x=-1;
+template <class T>
+T Stack<T>::pop() {
+    T x=-1;
     if (!top) {
         cout<<"Stack underflow"<<endl;
     } else {
-        node *t=top;
+        node<T> *t=top;
         x=t->data;
         top=top->next;
         delete t;
     }
     return x;
 }
-void Stack::display() {
+template <class T>
+void Stack<T>::display() {
 
-    node * p=top;
+    node<T> * p=top;
     while(p) {
         cout<<p->data<<endl;
         p=p->next;
     }
 }
-int Stack::peek(int pos) {
+template <class T>
+T Stack<T>::peek(int pos) {
+T x=-1;
     if (top && pos>0) {
-        node *p=top;
+        node<T> *p=top;
         for (int i=0; i<pos-1 && p; i++) {
             p=p->next;
         }
-        return p->data;
+        x=p->data;
     } else {
-        return -1;
+        cout<<"Invalid index"<<endl;
     }
+    return x;
 }
 
-int main() {
-
-Stack* st=new Stack();
-st->push(1);
-st->push(2);
-st->push(3);
-cout<<st->peek(1);
-    return 0;
-}
+//int main() {
+//
+//    return 0;
+//}
