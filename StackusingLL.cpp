@@ -8,9 +8,9 @@ class node {
 };
 template <class T>
 class Stack {
-  private:
-    node<T> * top;
+
   public:
+    node<T> * top;
     Stack() {
         top=0;
     }
@@ -54,7 +54,7 @@ void Stack<T>::display() {
 }
 template <class T>
 T Stack<T>::peek(int pos) {
-T x=-1;
+    T x=-1;
     if (top && pos>0) {
         node<T> *p=top;
         for (int i=0; i<pos-1 && p; i++) {
