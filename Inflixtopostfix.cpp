@@ -42,11 +42,14 @@ char * conversion(char * infix) {
     while (infix[i]!='\0') {
         if (isOperand(infix[i])) {
             postfix[j++]=infix[i++];
+
         } else {
-            if (!st->top || outprecedence(infix[i])>inprecedence(st->top->data) && infix[i]!=')') {
+            if (infix[i]!=')' || !st->top || outprecedence(infix[i])>inprecedence(st->top->data)) {
                 st->push(infix[i++]);
             } else {
-                postfix[j++]=st->pop();
+                char x=st->pop();
+                if (x!='('){postfix[j++]=x;}
+                else {i++;}
             }
         }
     }
@@ -59,16 +62,24 @@ return postfix;
 }
 
 int main() {
-    char *infix = new char[10];
+    char *infix = new char[18];
 
-    infix[0] = 'a';
-    infix[1] = '+';
-    infix[2] = 'b';
+    infix[0] = '(';
+    infix[1] = '(';
+    infix[2] = 'a';
     infix[3] = '+';
-    infix[4] = 'c';
-    infix[5] = '*';
-    infix[6] = 'd';
-    infix[7] = '\0';
+    infix[4] = 'b';
+    infix[5] = ')';
+    infix[6] = '*';
+    infix[7] = 'c';
+    infix[8] = ')';
+    infix[9] = '-';
+    infix[10] = 'd';
+    infix[11] = '^';
+    infix[12] = 'e';
+    infix[13] = '^';
+    infix[14] = 'f';
+    infix[15] = '\0';
     cout<<conversion(infix);
     return 0;
 }
