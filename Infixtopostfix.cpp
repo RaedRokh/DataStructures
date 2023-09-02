@@ -1,5 +1,6 @@
 #include <iostream>
 #include <cstring>
+#include <cmath>
 #include "StackusingLL.cpp"
 using namespace std;
 int isOperand(char x) {
@@ -48,39 +49,73 @@ char * conversion(char * infix) {
                 st->push(infix[i++]);
             } else {
                 char x=st->pop();
-                if (x!='('){postfix[j++]=x;}
-                else {i++;}
+                if (x!='(') {
+                    postfix[j++]=x;
+                } else {
+                    i++;
+                }
             }
         }
     }
 
-while (st->top) {
-    postfix[j++]=st->pop();
+    while (st->top) {
+        postfix[j++]=st->pop();
+    }
+    postfix[j++]='\0';
+    return postfix;
 }
-postfix[j++]='\0';
-return postfix;
+int eval (char * postfix) {
+    int result=0;
+    Stack<int> *st=new Stack<int>;
+    for (int i=0; postfix[i]!='\0'; i++) {
+        if (isOperand(postfix[i])) {
+            st->push(postfix[i]-'0');
+        } else {
+            int x=st->pop();
+            int y=st->pop();
+            switch(postfix[i]) {
+            case '+':
+                result=y+x;
+                break;
+            case '*':
+                result=y*x;
+                break;
+            case '-':
+                result=y-x;
+                break;
+            case '/':
+                result=y/x;
+                break;
+            case '^':
+                result=pow(y,x);
+                break;
+            }
+            st->push(result);
+        }
+    }
+    return st->pop();
 }
-
 int main() {
     char *infix = new char[18];
 
     infix[0] = '(';
     infix[1] = '(';
-    infix[2] = 'a';
+    infix[2] = '1';
     infix[3] = '+';
-    infix[4] = 'b';
+    infix[4] = '2';
     infix[5] = ')';
     infix[6] = '*';
-    infix[7] = 'c';
+    infix[7] = '2';
     infix[8] = ')';
     infix[9] = '-';
-    infix[10] = 'd';
+    infix[10] = '2';
     infix[11] = '^';
-    infix[12] = 'e';
+    infix[12] = '2';
     infix[13] = '^';
-    infix[14] = 'f';
+    infix[14] = '2';
     infix[15] = '\0';
-    cout<<conversion(infix);
+    cout<<conversion(infix)<<endl;
+        cout<<eval(conversion(infix))<<endl;
     return 0;
 }
 
