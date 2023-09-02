@@ -31,15 +31,17 @@ void Queue::enqueue(int val) {
     }
 }
 int Queue::dequeue() {
+    int x=-1;
     if (!Front) {
         cout<<"Empty Queue"<<endl;
 
     } else {
-        node *t=new node;
-        t=Front;
+        node *t=Front;
+        x=t->data;
         Front=Front->next;
         delete t;
     }
+    return x;
 }
 void Queue::display() {
     node*p=Front;
