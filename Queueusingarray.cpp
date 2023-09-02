@@ -4,8 +4,8 @@ using namespace std;
 class Queue {
   private:
     int Size;
-    int Front=-1;
-    int Rear=-1;
+    int Front=0;
+    int Rear=0;
     int *Q;
   public:
     Queue(int s) {
@@ -21,7 +21,7 @@ class Queue {
     int isEmpty();
 };
 int Queue::isFull() {
-    return Rear==Size-1;
+    return (Rear+1)%Size==Front;
 }
 int Queue::isEmpty() {
     return Rear==Front;
@@ -30,7 +30,7 @@ void Queue::enqueue(int x) {
     if (isFull()) {
         cout<<"Full Queue"<<endl;
     } else {
-        Rear++;
+        Rear=(Rear+1)%Size;
         Q[Rear]=x;
     }
 }
@@ -39,16 +39,17 @@ int Queue::dequeue() {
     if (isEmpty()) {
         cout<<"Empty Queue"<<endl;
     } else {
-        x=Q[Front+1];
-        Front++;
+        x=Q[(Front+1)%Size];
+        Front=(Front+1)%Size;
     }
     return x;
 }
 void Queue::display() {
     int p=Front+1;
-    for (p; p<=Rear; p++) {
+    do{
         cout<<Q[p]<<endl;
-    }
+        p=(p+1)%Size;
+    }while(p!=(Rear+1)%Size);
 }
 int main() {
     Queue* q=new Queue(5);
@@ -56,7 +57,10 @@ int main() {
     q->enqueue(2);
     q->enqueue(3);
     q->enqueue(4);
-    q->enqueue(5);
+    q->dequeue();
+    q->dequeue();
+    q->enqueue(4);
+    q->enqueue(7);
     q->display();
 
     return 0;
