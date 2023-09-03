@@ -11,12 +11,17 @@ class Queue {
   private:
     node * Front=0;
     node * Rear=0;
+    node **Q;
   public:
+    void Queue(){
+        int Size=10;
+        Q=new node*[Size];
+    }
     void enqueue(int val);
     int dequeue();
     void display();
 };
-void Queue::enqueue(int val) {
+void Queue::enqueue(Node* x) {
     node *t=new node;
     if (!t) {
         cout<<"Full Queue"<<endl;
@@ -50,13 +55,4 @@ void Queue::display() {
         p=p->next;
     }
 }
-int main() {
-    Queue *q=new Queue;
-    q->enqueue(1);
-    q->enqueue(2);
-    q->enqueue(3);
-    q->dequeue();
-    q->display();
 
-    return 0;
-}
