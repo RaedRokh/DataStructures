@@ -1,19 +1,24 @@
 #include <iostream>
 using namespace std;
-
+class node {
+  public:
+    node *rchild=0;
+    node *lchild=0;
+    int data;
+};
 class Queue {
   private:
     int Size;
     int Front=-1;
     int Rear=-1;
-    int *Q;
+    node **Q;
   public:
     Queue(int s) {
         this->Size=s;
-        Q=new int[s];
+        Q=new node*[s];
     };
-    void enqueue(int x);
-    int dequeue();
+    void enqueue(node* x);
+    node* dequeue();
     void display();
     int first();
     int last();
@@ -26,7 +31,7 @@ int Queue::isFull() {
 int Queue::isEmpty() {
     return Rear==Front;
 }
-void Queue::enqueue(int x) {
+void Queue::enqueue(node* x) {
     if (isFull()) {
         cout<<"Full Queue"<<endl;
     } else {
@@ -34,8 +39,8 @@ void Queue::enqueue(int x) {
         Q[Rear]=x;
     }
 }
-int Queue::dequeue() {
-    int x=-1;
+node* Queue::dequeue() {
+    node* x=0;
     if (isEmpty()) {
         cout<<"Empty Queue"<<endl;
     } else {
