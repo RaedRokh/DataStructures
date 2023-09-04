@@ -3,13 +3,14 @@ class tree {
 
   public:
     node *root;
-    tree(){
-    root=new node;}
+    tree() {
+        root=new node;
+    }
     void create();
     void preorder(node* p);
     void postorder(node* p);
     void inorder(node* p);
-    void levelorder(node* p);
+    void levelorder();
     void height(node* root);
 };
 void tree::create() {
@@ -21,7 +22,7 @@ void tree::create() {
 
     q->enqueue(root);
     node *p=root;
-node *t;
+    node *t;
     while(!q->isEmpty()) {
         p=q->dequeue();
 
@@ -68,10 +69,28 @@ void tree::inorder(node* p) {
         inorder(p->rchild);
     }
 }
-int main() {
-tree* t=new tree;
-t->create();
-t->preorder(t->root);
+void tree::levelorder() {
+    Queue *q=new Queue(100);
+    node *p=root;
+    q->enqueue(p);
+    cout<<p->data<<endl;
+    while(!q->isEmpty()) {
+        p=q->dequeue();
+        if (p->lchild) {
+            cout<<p->lchild->data<<endl;
+            q->enqueue(p->lchild);
+        }
+        if (p->rchild) {
+            cout<<p->rchild->data<<endl;
+            q->enqueue(p->rchild);
+        }
 
-    return 0;
+    }
 }
+    int main() {
+        tree* t=new tree;
+        t->create();
+        t->levelorder();
+
+        return 0;
+    }
