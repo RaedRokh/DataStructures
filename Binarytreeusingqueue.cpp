@@ -1,9 +1,10 @@
 #include "Queueusingarray.cpp"
 class tree {
 
-  public:
+public:
     node *root;
-    tree() {
+    tree()
+    {
         root=new node;
     }
     void create();
@@ -11,9 +12,10 @@ class tree {
     void postorder(node* p);
     void inorder(node* p);
     void levelorder();
-    void height(node* root);
+    int height(node* root);
 };
-void tree::create() {
+void tree::create()
+{
     Queue *q=new Queue(100);
     int val;
     cout<<"Enter root value: "<<endl;
@@ -33,27 +35,32 @@ void tree::create() {
             t->data=val;
             p->lchild=t;
             q->enqueue(t);
-            cout<<"Enter R child value of "<<p->data<<" "<<endl;
-            cin>>val;
-            if (val!=-1) {
-                t=new node;
-                t->data=val;
-                p->rchild=t;
-                q->enqueue(t);
-            }
 
+        }
+        cout<<"Enter R child value of "<<p->data<<" "<<endl;
+        cin>>val;
+        if (val!=-1) {
+
+            t=new node;
+            t->data=val;
+            p->rchild=t;
+            q->enqueue(t);
         }
 
     }
+
 }
-void tree::preorder(node* p) {
+
+void tree::preorder(node* p)
+{
     if (p) {
         cout<<p->data<<endl;
         preorder(p->lchild);
         preorder(p->rchild);
     }
 }
-void tree::postorder(node* p) {
+void tree::postorder(node* p)
+{
     if (p) {
 
 
@@ -62,14 +69,16 @@ void tree::postorder(node* p) {
         cout<<p->data<<endl;
     }
 }
-void tree::inorder(node* p) {
+void tree::inorder(node* p)
+{
     if (p) {
         inorder(p->lchild);
         cout<<p->data<<endl;
         inorder(p->rchild);
     }
 }
-void tree::levelorder() {
+void tree::levelorder()
+{
     Queue *q=new Queue(100);
     node *p=root;
     q->enqueue(p);
@@ -87,10 +96,17 @@ void tree::levelorder() {
 
     }
 }
-    int main() {
-        tree* t=new tree;
-        t->create();
-        t->levelorder();
-
+int tree::height(node* root)
+{
+    if (!root) {
         return 0;
     }
+    return max(root->lchild?1+height(root->rchild):0,root->lchild?1+height(root->lchild):0);
+}
+int main()
+{
+    tree* t=new tree;
+    t->create();
+    cout<<t->height(t->root);
+    return 0;
+}
