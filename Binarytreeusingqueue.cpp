@@ -112,7 +112,7 @@ int tree::height(node* root)
 void tree::preorderit(node*p)
 {
     S::Stack<node*> *s=new S::Stack<node*>();
-    while (!s->top || p) {
+    while (s->top || p) {
         if (p) {
             s->push(p);
             cout<<p->data<<endl;
@@ -121,6 +121,22 @@ void tree::preorderit(node*p)
         }
         else {
             p=s->pop();
+            p=p->rchild;
+        }
+    }
+}
+void tree::inorderit(node*p)
+{
+    S::Stack<node*> *s=new S::Stack<node*>();
+    while (s->top || p) {
+        if (p) {
+            s->push(p);
+            p=p->lchild;
+
+        }
+        else {
+            p=s->pop();
+            cout<<p->data<<endl;
             p=p->rchild;
         }
     }
@@ -154,6 +170,6 @@ int main()
 {
     tree* t=new tree;
     t->create();
-    t->postorderit(t->root);
+    t->inorderit(t->root);
     return 0;
 }
