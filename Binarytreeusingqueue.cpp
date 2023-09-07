@@ -3,10 +3,9 @@
 using namespace Q;
 class tree {
 
-public:
+  public:
     Q::node *root;
-    tree()
-    {
+    tree() {
         root=new Q::node;
     }
     void create();
@@ -21,8 +20,7 @@ public:
     int countnodes(Q::node * p);
     int countleafs(Q::node * p);
 };
-void tree::create()
-{
+void tree::create() {
     Queue *q=new Q::Queue(100);
     int val;
     cout<<"Enter root value: "<<endl;
@@ -58,16 +56,14 @@ void tree::create()
 
 }
 
-void tree::preorder(node* p)
-{
+void tree::preorder(node* p) {
     if (p) {
         cout<<p->data<<endl;
         preorder(p->lchild);
         preorder(p->rchild);
     }
 }
-void tree::postorder(node* p)
-{
+void tree::postorder(node* p) {
     if (p) {
 
 
@@ -76,16 +72,14 @@ void tree::postorder(node* p)
         cout<<p->data<<endl;
     }
 }
-void tree::inorder(node* p)
-{
+void tree::inorder(node* p) {
     if (p) {
         inorder(p->lchild);
         cout<<p->data<<endl;
         inorder(p->rchild);
     }
 }
-void tree::levelorder()
-{
+void tree::levelorder() {
     Queue *q=new Queue(100);
     node *p=root;
     q->enqueue(p);
@@ -103,16 +97,14 @@ void tree::levelorder()
 
     }
 }
-int tree::height(node* root)
-{
+int tree::height(node* root) {
     if (!root) {
         return 0;
     }
     return max(root->lchild?1+height(root->rchild):0,root->lchild?1+height(root->lchild):0);
 }
 
-void tree::preorderit(node*p)
-{
+void tree::preorderit(node*p) {
     S::Stack<node*> *s=new S::Stack<node*>();
     while (s->top || p) {
         if (p) {
@@ -120,47 +112,41 @@ void tree::preorderit(node*p)
             cout<<p->data<<endl;
             p=p->lchild;
 
-        }
-        else {
+        } else {
             p=s->pop();
             p=p->rchild;
         }
     }
 }
-void tree::inorderit(node*p)
-{
+void tree::inorderit(node*p) {
     S::Stack<node*> *s=new S::Stack<node*>();
     while (s->top || p) {
         if (p) {
             s->push(p);
             p=p->lchild;
 
-        }
-        else {
+        } else {
             p=s->pop();
             cout<<p->data<<endl;
             p=p->rchild;
         }
     }
 }
-void tree::postorderit(Q::node*p)
-{
+void tree::postorderit(Q::node*p) {
     node * t=p;
     S::Stack<node*> *s=new S::Stack<node*>();
     while(t || s->top) {
         if (t) {
             s->push(t);
             t=t->lchild;
-        }
-        else {
+        } else {
             t=s->pop();
             intptr_t address = reinterpret_cast<intptr_t>(t);
             if (address>0) {
                 address = -address;
                 s->push(reinterpret_cast<node*>(address));
                 t=t->rchild;
-            }
-            else {
+            } else {
                 t = reinterpret_cast<node*>(-address);
                 cout<<t->data<<endl;
                 t=nullptr;
@@ -168,29 +154,26 @@ void tree::postorderit(Q::node*p)
         }
     }
 }
-int tree::countnodes(node * p){
-    int x,y;
-if (p){
-x=countnodes(p->lchild);
-y=countnodes(p->lchild);
-return x+y+1;
+int tree::countnodes(node * p) {
+    if (!p) {
+        return 0;
+    }
+    return countnodes(p->lchild)+countnodes(p->rchild)+1;
 }
-return 0;
-}
-int tree::countleafs(node * p){
-    int x,y;
-if (p){
-x=countnodes(p->lchild);
-y=countnodes(p->lchild);
-if (!p->lchild || !p->rchild){
-return x+y+1;}
-else {return x+y;}
-}
-return 0;
+int tree::countleafs(node * p) {
+    if (!p) {
+        return 0;
+
+    }
+    if (!p->lchild || !p->rchild) {
+        return countnodes(p->lchild)+countnodes(p->rchild)+1;
+    } else {
+        return countnodes(p->lchild)+countnodes(p->rchild);
+    }
+
 
 }
-int main()
-{
+int main() {
     tree* t=new tree;
     t->create();
     cout<<t->countleafs(t->root)<<endl;
