@@ -19,6 +19,7 @@ public:
     void inorderit(Q::node*p);
     void postorderit(Q::node*p);
     int countnodes(Q::node * p);
+    int countleafs(Q::node * p);
 };
 void tree::create()
 {
@@ -176,10 +177,22 @@ return x+y+1;
 }
 return 0;
 }
+int tree::countleafs(node * p){
+    int x,y;
+if (p){
+x=countnodes(p->lchild);
+y=countnodes(p->lchild);
+if (!p->lchild || !p->rchild){
+return x+y+1;}
+else {return x+y;}
+}
+return 0;
+
+}
 int main()
 {
     tree* t=new tree;
     t->create();
-    cout<<t->countnodes(t->root)<<endl;
+    cout<<t->countleafs(t->root)<<endl;
     return 0;
 }
