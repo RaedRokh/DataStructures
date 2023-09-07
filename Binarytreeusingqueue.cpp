@@ -18,6 +18,7 @@ public:
     void preorderit(Q::node *p);
     void inorderit(Q::node*p);
     void postorderit(Q::node*p);
+    int countnodes(Q::node * p);
 };
 void tree::create()
 {
@@ -166,10 +167,19 @@ void tree::postorderit(Q::node*p)
         }
     }
 }
+int tree::countnodes(node * p){
+    int x,y;
+if (p){
+x=countnodes(p->lchild);
+y=countnodes(p->lchild);
+return x+y+1;
+}
+return 0;
+}
 int main()
 {
     tree* t=new tree;
     t->create();
-    t->inorderit(t->root);
+    cout<<t->countnodes(t->root)<<endl;
     return 0;
 }
