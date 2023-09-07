@@ -1,5 +1,6 @@
 #include <iostream>
 using namespace std;
+namespace S{
 template <class T>
 class node {
   public:
@@ -32,7 +33,7 @@ void Stack<T>::push(T val) {
 }
 template <class T>
 T Stack<T>::pop() {
-    T x=-1;
+    T x=(T)-1;
     if (!top) {
         cout<<"Stack underflow"<<endl;
     } else {
@@ -66,7 +67,7 @@ T Stack<T>::peek(int pos) {
     }
     return x;
 }
-
+}
 //int main() {
 //
 //    return 0;

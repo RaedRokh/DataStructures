@@ -1,4 +1,5 @@
 #include <iostream>
+namespace Q{
 using namespace std;
 class node {
   public:
@@ -54,4 +55,5 @@ void Queue::display() {
     for (p; p<=Rear; p++) {
         cout<<Q[p]<<endl;
     }
+}
 }

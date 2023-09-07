@@ -11,7 +11,7 @@ class Stack {
         this->Size=Size;
         st=new int[Size];
     }
-    void push(int e);
+    void push(node * e);
     void display();
     int pop();
     int isEmpty();

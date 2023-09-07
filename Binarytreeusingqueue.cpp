@@ -1,22 +1,27 @@
+#include "StackusingLL.cpp"
 #include "Queueusingarray.cpp"
+using namespace Q;
 class tree {
 
 public:
-    node *root;
+    Q::node *root;
     tree()
     {
-        root=new node;
+        root=new Q::node;
     }
     void create();
-    void preorder(node* p);
-    void postorder(node* p);
-    void inorder(node* p);
+    void preorder(Q::node* p);
+    void postorder(Q::node* p);
+    void inorder(Q::node* p);
     void levelorder();
-    int height(node* root);
+    int height(Q::node* root);
+    void preorderit(Q::node *p);
+    void inorderit(Q::node*p);
+    void postorderit(Q::node*p);
 };
 void tree::create()
 {
-    Queue *q=new Queue(100);
+    Queue *q=new Q::Queue(100);
     int val;
     cout<<"Enter root value: "<<endl;
     cin>>val;
@@ -103,10 +108,52 @@ int tree::height(node* root)
     }
     return max(root->lchild?1+height(root->rchild):0,root->lchild?1+height(root->lchild):0);
 }
+
+void tree::preorderit(node*p)
+{
+    S::Stack<node*> *s=new S::Stack<node*>();
+    while (!s->top || p) {
+        if (p) {
+            s->push(p);
+            cout<<p->data<<endl;
+            p=p->lchild;
+
+        }
+        else {
+            p=s->pop();
+            p=p->rchild;
+        }
+    }
+}
+void tree::postorderit(Q::node*p)
+{
+    node * t=p;
+    S::Stack<node*> *s=new S::Stack<node*>();
+    while(t || s->top) {
+        if (t) {
+            s->push(t);
+            t=t->lchild;
+        }
+        else {
+            t=s->pop();
+            intptr_t address = reinterpret_cast<intptr_t>(t);
+            if (address>0) {
+                address = -address;
+                s->push(reinterpret_cast<node*>(address));
+                t=t->rchild;
+            }
+            else {
+                t = reinterpret_cast<node*>(-address);
+                cout<<t->data<<endl;
+                t=nullptr;
+            }
+        }
+    }
+}
 int main()
 {
     tree* t=new tree;
     t->create();
-    cout<<t->height(t->root);
+    t->postorderit(t->root);
     return 0;
 }
