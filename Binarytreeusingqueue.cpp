@@ -2,11 +2,10 @@
 #include "Queueusingarray.cpp"
 using namespace Q;
 class tree {
-
   public:
     Q::node *root;
     tree() {
-        root=new Q::node;
+        root=0;
     }
     void create();
     void preorder(Q::node* p);
@@ -19,25 +18,15 @@ class tree {
     void postorderit(Q::node*p);
     int countnodes(Q::node * p);
     int countleafs(Q::node * p);
-    Q::node* Rsearch(Q::node* p,int key);
+
 };
-Q::node* tree::Rsearch(Q::node* p,int key){
-    if (!p){
-        return 0;
-    }
-    if (p->data==key){
-        return p;
-    }
-    else if (p->data>key){
-        return Rsearch(p->lchild,key);
-    }
-    else {return Rsearch(p->rchild,key);}
-}
+
 void tree::create() {
     Queue *q=new Q::Queue(100);
     int val;
     cout<<"Enter root value: "<<endl;
     cin>>val;
+    root=new node;
     root->data=val;
 
     q->enqueue(root);
@@ -186,12 +175,16 @@ int tree::countleafs(node * p) {
 
 
 }
-int main() {
-    tree* t=new tree;
-    t->create();
-    if (t->Rsearch(t->root,10)){
-        cout<<"key found";
-    }
-    else {cout<<"not found"<<endl;}
-    return 0;
-}
+//int main() {
+//    tree * t=new tree;
+//    t->create();
+//
+//    t->preorder(t->root);
+//    t->preorderit(t->root);
+//    cout<<t->countleafs(t->root);
+//    cout<<"-----------"<<endl;
+//    cout<<t->countnodes(t->root);
+//        cout<<"-----------"<<endl;
+//        cout<<t->height(t->root)<<endl;
+//    return 0;
+//}

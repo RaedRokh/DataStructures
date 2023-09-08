@@ -1,5 +1,5 @@
 #include <iostream>
-namespace Q{
+namespace Q {
 using namespace std;
 class node {
   public:
