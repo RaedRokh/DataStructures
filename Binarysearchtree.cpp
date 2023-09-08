@@ -2,29 +2,46 @@
 using namespace Q;
 
 class bst:public tree {
-public:
-    void Insert(int key);
+  public:
+    void IInsert(int key);
+    node * RInsert(node * p,int key);
     Q::node* Rsearch(Q::node* p,int key);
 };
-Q::node* bst::Rsearch(Q::node* p,int key){
-    if (!p){
+Q::node* bst::Rsearch(Q::node* p,int key) {
+    if (!p) {
         return 0;
     }
-    if (p->data==key){
+    if (p->data==key) {
         return p;
-    }
-    else if (p->data>key){
+    } else if (p->data>key) {
         return Rsearch(p->lchild,key);
+    } else {
+        return Rsearch(p->rchild,key);
     }
-    else {return Rsearch(p->rchild,key);}
 }
-void bst::Insert(int key) {
+node * bst::RInsert(node * p,int key) {
+
+    if (!p) {
+        node *t =new node;
+        t->data=key;
+       return t;
+    }
+    if (p->data==key) {
+        return p;
+    } else if (p->data>key) {
+        p->lchild=RInsert(p->lchild,key);
+    } else {
+        p->rchild=RInsert(p->rchild,key);
+    }
+    return p;
+}
+void bst::IInsert(int key) {
     node * t=root;
     node * r=root;
     node * p=new node();
     p->data=key;
-p->rchild=0;
-p->lchild=0;
+    p->rchild=0;
+    p->lchild=0;
     if (!root) {
         root=p;
         return;
@@ -48,13 +65,16 @@ p->lchild=0;
 }
 int main() {
     bst * t=new bst;
-    t->Insert(10);
-  t->Insert(20);
-  t->Insert(30);
+    t->root=new node;
+    t->root=t->RInsert(t->root,10);
+    t->RInsert(t->root,5);
+    t->RInsert(t->root,30);
     t->inorderit(t->root);
-    if (t->Rsearch(t->root,40)){
-        cout<<"found"<<endl;}
-    else {cout<<"unfound"<<endl;}
+    if (t->Rsearch(t->root,40)) {
+        cout<<"found"<<endl;
+    } else {
+        cout<<"unfound"<<endl;
+    }
 
     return 0;
 }
