@@ -100,10 +100,13 @@ void tree::levelorder() {
     }
 }
 int tree::height(node* root) {
+    int x,y;
     if (!root) {
         return 0;
     }
-    return max(root->lchild?1+height(root->rchild):0,root->lchild?1+height(root->lchild):0);
+    x=height(root->lchild);
+      y=height(root->lchild);
+    return x>y?x+1:y+1;
 }
 
 void tree::preorderit(node*p) {

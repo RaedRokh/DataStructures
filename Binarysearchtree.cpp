@@ -6,7 +6,55 @@ class bst:public tree {
     void IInsert(int key);
     node * RInsert(node * p,int key);
     Q::node* Rsearch(Q::node* p,int key);
+    node * Delete(node*p,int key);
 };
+node * inpre(node * p) {
+    while (p && p->rchild) {
+        p=p->rchild;
+    }
+    cout<<p->data<<"eeeeeeee"<<endl;
+    return p;
+}
+node * insucc(node * p) {
+    while (p && p->lchild) {
+        p=p->lchild;
+    }
+
+    return p;
+}
+node * bst::Delete(node*p,int key) {
+    if (!p) {
+        return 0;
+    }
+    if (!p->lchild && !p->rchild) {
+        if (p==root) {
+            root=0;
+        }
+        p=0;
+        return 0;
+    }
+    if (key<p->data) {
+             cout<<"b"<<endl;
+        p->lchild=Delete(p->lchild,key);
+    } else if (key>p->data) {
+        cout<<"a"<<endl;
+        p->rchild=Delete(p->rchild,key);
+    } else {
+        cout<<height(p->rchild)<<"height"<<endl;
+        node *q =new node;
+        if (height(p->lchild)>height(p->rchild)) {
+
+            q=inpre(p->lchild);
+            p->data=q->data;
+            p->lchild=Delete(p->lchild,q->data);
+        } else {
+            q=insucc(p->rchild);
+            p->data=q->data;
+            p->rchild=Delete(p->rchild,q->data);
+        }
+    }
+    return p;
+}
 Q::node* bst::Rsearch(Q::node* p,int key) {
     if (!p) {
         return 0;
@@ -24,7 +72,7 @@ node * bst::RInsert(node * p,int key) {
     if (!p) {
         node *t =new node;
         t->data=key;
-       return t;
+        return t;
     }
     if (p->data==key) {
         return p;
@@ -65,16 +113,15 @@ void bst::IInsert(int key) {
 }
 int main() {
     bst * t=new bst;
-    t->root=new node;
-    t->root=t->RInsert(t->root,10);
-    t->RInsert(t->root,5);
-    t->RInsert(t->root,30);
-    t->inorderit(t->root);
-    if (t->Rsearch(t->root,40)) {
-        cout<<"found"<<endl;
-    } else {
-        cout<<"unfound"<<endl;
-    }
 
+    t->root=t->RInsert(t->root,50);
+    t->RInsert(t->root,10);
+    t->RInsert(t->root,40);
+    t->RInsert(t->root,20);
+    t->RInsert(t->root,30);
+    t->Delete(t->root,10);
+    t->inorderit(t->root);
+    cout<<"-----------"<<endl;
+    t->postorder(t->root);
     return 0;
 }
