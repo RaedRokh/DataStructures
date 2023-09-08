@@ -7,6 +7,8 @@ class bst:public tree {
     node * RInsert(node * p,int key);
     Q::node* Rsearch(Q::node* p,int key);
     node * Delete(node*p,int key);
+       friend void createPre(bst* tree,int pre[], int n);
+
 };
 node * inpre(node * p) {
     while (p && p->rchild) {
@@ -34,13 +36,13 @@ node * bst::Delete(node*p,int key) {
         return 0;
     }
     if (key<p->data) {
-             cout<<"b"<<endl;
+
         p->lchild=Delete(p->lchild,key);
     } else if (key>p->data) {
-        cout<<"a"<<endl;
+
         p->rchild=Delete(p->rchild,key);
     } else {
-        cout<<height(p->rchild)<<"height"<<endl;
+
         node *q =new node;
         if (height(p->lchild)>height(p->rchild)) {
 
@@ -111,17 +113,50 @@ void bst::IInsert(int key) {
         r->rchild=p;
     }
 }
+void createPre(bst * tree,int pre[], int n){
+node *t=new node;
+ S::Stack<node*> *s=new S::Stack<node*>();
+ int i=0;
+t->data=pre[i++];
+tree->root=t;
+node *p=tree->root;
+while (i<n){
+    if(p->data>pre[i]){
+        node * temp=new node;
+        temp->data=pre[i++];
+        p->lchild=temp;
+        s->push(p);
+        p=temp;
+    }
+    else if (p->data<pre[i] && s->top && (s->top)->data->data>pre[i]){
+            node * temp=new node;
+        temp->data=pre[i++];
+        p->rchild=temp;
+        p=temp;
+        }
+        else {
+            p=s->pop();
+            if (!s->top){
+                node * temp=new node;
+            temp->data=INT_MAX;
+                s->push(temp);
+            }
+        }
+    }
+}
+
 int main() {
     bst * t=new bst;
-
-    t->root=t->RInsert(t->root,50);
-    t->RInsert(t->root,10);
-    t->RInsert(t->root,40);
-    t->RInsert(t->root,20);
-    t->RInsert(t->root,30);
-    t->Delete(t->root,10);
-    t->inorderit(t->root);
-    cout<<"-----------"<<endl;
-    t->postorder(t->root);
+    int p[]={30,20,10,15,25,40,50,45};
+createPre(t,p,8);
+//    t->root=t-,RInsert(t->root,50);
+//    t->RInsert(t->root,10);
+//    t->RInsert(t->root,40);
+//    t->RInsert(t->root,20);
+//    t->RInsert(t->root,30);
+//    t->Delete(t->root,10);
+//    t->inorderit(t->root);
+//    cout<<"-----------"<<endl;
+    t->preorder(t->root);
     return 0;
 }

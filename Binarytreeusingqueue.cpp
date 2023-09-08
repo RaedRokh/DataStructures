@@ -18,6 +18,7 @@ class tree {
     void postorderit(Q::node*p);
     int countnodes(Q::node * p);
     int countleafs(Q::node * p);
+    friend void createPre(int pre[], int n);
 
 };
 
