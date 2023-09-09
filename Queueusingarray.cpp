@@ -6,6 +6,7 @@ class node {
     node *rchild=0;
     node *lchild=0;
     int data;
+    int height;
 };
 class Queue {
   private:
