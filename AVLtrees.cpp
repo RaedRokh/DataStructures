@@ -6,6 +6,7 @@ class avl:public tree {
     node * RInsert(node * p,int key);
     node *LLrotation(node *p);
     node *LRrotation(node *p);
+    node *RRrotation(node *p);
 };
 
 int nodeheight(node *p){
@@ -32,14 +33,29 @@ if (root==p){
 return root;
 
 }
+node *avl::RRrotation(node *p){
+node*pr=p->rchild;
+node *prl=pr->lchild?pr->lchild:0;
+
+pr->lchild=p;
+p->rchild=prl;
+pr->height=nodeheight(pr);
+p->height=nodeheight(p);
+if (root==p){
+    root=pr;}
+return root;
+
+}
 node *avl::LRrotation(node *p){
 node*pl=p->lchild;
 node *plr=pl->rchild?pl->rchild:0;
-
 p->lchild=plr->rchild;
 pl->rchild=plr->lchild;
 plr->rchild=p;
 plr->lchild=pl;
+pl->height=nodeheight(pl);
+p->height=nodeheight(p);
+plr->height=nodeheight(plr);
 if (root==p){
     root=plr;}
 return root;
@@ -71,12 +87,13 @@ if (balancefactor(p)==2 && balancefactor(p->lchild)==1){
     return LLrotation(p);
 }
 else if (balancefactor(p)==2 && balancefactor(p->lchild)==-1){
-        cout<<"lekhra"<<p->data<<endl;
+
     return LRrotation(p);
 }
-//else if (balancefactor(p)==-2 && balancefactor(p)==-1){
-//    return RRrotation(p);
-//}
+else if (balancefactor(p)==-2 && balancefactor(p->rchild)==-1){
+        cout<<"lekhra"<<p->data<<endl;
+    return RRrotation(p);
+}
 //else if (balancefactor(p)==-2 && balancefactor(p)==1){
 //    return RLrotation(p);
 //}
@@ -89,7 +106,7 @@ return p;
 int main(){
     avl *l=new avl;
     l->root=l->RInsert(l->root,10);
-    l->RInsert(l->root,5);
-    l->RInsert(l->root,8);
+    l->RInsert(l->root,20);
+    l->RInsert(l->root,30);
     l->preorder(l->root);
 return 0;}
