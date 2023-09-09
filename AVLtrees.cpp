@@ -7,6 +7,7 @@ class avl:public tree {
     node *LLrotation(node *p);
     node *LRrotation(node *p);
     node *RRrotation(node *p);
+    node *RLrotation(node *p);
 };
 
 int nodeheight(node *p){
@@ -43,6 +44,22 @@ pr->height=nodeheight(pr);
 p->height=nodeheight(p);
 if (root==p){
     root=pr;}
+return root;
+
+}
+node *avl::RLrotation(node *p){
+node*pr=p->rchild;
+node *prl=pr->lchild?pr->lchild:0;
+pr->lchild=prl->rchild;
+p->rchild=prl->lchild;
+prl->lchild=p;
+prl->rchild=pr;
+
+pr->height=nodeheight(pr);
+prl->height=nodeheight(prl);
+p->height=nodeheight(p);
+if (root==p){
+    root=prl;}
 return root;
 
 }
@@ -91,12 +108,13 @@ else if (balancefactor(p)==2 && balancefactor(p->lchild)==-1){
     return LRrotation(p);
 }
 else if (balancefactor(p)==-2 && balancefactor(p->rchild)==-1){
-        cout<<"lekhra"<<p->data<<endl;
+
     return RRrotation(p);
 }
-//else if (balancefactor(p)==-2 && balancefactor(p)==1){
-//    return RLrotation(p);
-//}
+else if (balancefactor(p)==-2 && balancefactor(p->rchild)==1){
+           cout<<"lekhra"<<p->data<<endl;
+    return RLrotation(p);
+}
 //else {cout<<"wtf"<<endl;}
 
 return p;
@@ -105,8 +123,10 @@ return p;
 
 int main(){
     avl *l=new avl;
-    l->root=l->RInsert(l->root,10);
-    l->RInsert(l->root,20);
-    l->RInsert(l->root,30);
+    l->root=l->RInsert(l->root,30);
+    l->RInsert(l->root,35);
+    l->RInsert(l->root,32);
+    l->RInsert(l->root,31);
+        l->RInsert(l->root,33);
     l->preorder(l->root);
 return 0;}
