@@ -14,7 +14,6 @@ node * inpre(node * p) {
     while (p && p->rchild) {
         p=p->rchild;
     }
-    cout<<p->data<<"eeeeeeee"<<endl;
     return p;
 }
 node * insucc(node * p) {

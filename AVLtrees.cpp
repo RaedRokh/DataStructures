@@ -8,18 +8,93 @@ class avl:public tree {
     node *LRrotation(node *p);
     node *RRrotation(node *p);
     node *RLrotation(node *p);
+    node * Delete(node *p,int key);
 };
-
 int nodeheight(node *p) {
     int hr=p && p->rchild?p->rchild->height:0;
     int hl=p && p->lchild?p->lchild->height:0;
+
     return hl>=hr?hl+1:hr+1;
 }
 int balancefactor(node *p) {
     int hr=p && p->rchild?p->rchild->height:0;
     int hl=p && p->lchild?p->lchild->height:0;
+
     return hl-hr;
 }
+node * inpre(node * p) {
+    while (p && p->rchild) {
+        p=p->rchild;
+    }
+    return p;
+}
+node * insucc(node * p) {
+    while (p && p->lchild) {
+        p=p->lchild;
+    }
+
+    return p;
+}
+node * avl::Delete(node *p,int key) {
+//     cout<<p->data<<"lena"<<balancefactor(p)<<endl;
+    if (!p) {
+        return 0;
+    }
+    if (!p->rchild && !p->lchild) {
+        if (p==root) {
+            root=0;
+        }
+        p=0;
+        return 0;
+    }
+    if (p->data<key) {
+
+        p->rchild=Delete(p->rchild,key);
+        p->height=nodeheight(p);
+        if (balancefactor(p)==2 && balancefactor(p->lchild)==1) {
+
+            return LLrotation(p);
+
+        } else if (balancefactor(p)==2 && balancefactor(p->lchild)==-1) {
+            return LRrotation(p);
+        }
+        if (balancefactor(p)==2 && balancefactor(p->lchild)==0) {
+            return LLrotation(p);
+        }
+    } else if (p->data>key) {
+        p->lchild=Delete(p->lchild,key);
+        p->height=nodeheight(p);
+        if (balancefactor(p)==-2 && balancefactor(p->rchild)==-1) {
+            return RRrotation(p);
+        } else if (balancefactor(p)==-2 && balancefactor(p->rchild)==1) {
+            return RLrotation(p);
+        }
+        if (balancefactor(p)==-2 && balancefactor(p->rchild)==0) {
+            return RRrotation(p);
+        }
+    } else {
+
+        node *t=new node;
+        if (balancefactor(p)<0) {
+
+            t=insucc(p->rchild);
+            p->data=t->data;
+            p->rchild=Delete(p->rchild,t->data);
+
+
+        } else {
+            t=inpre(p->lchild);
+            p->data=t->data;
+            p->lchild=Delete(p->lchild,t->data);
+
+        }
+
+
+    }
+
+    return p;
+}
+
 node *avl::LLrotation(node *p) {
     node*pl=p->lchild;
     node *plr=pl->rchild?pl->rchild:0;
@@ -116,10 +191,11 @@ node
 int main() {
     avl *l=new avl;
     l->root=l->RInsert(l->root,30);
-    l->RInsert(l->root,35);
-    l->RInsert(l->root,32);
-    l->RInsert(l->root,31);
-    l->RInsert(l->root,33);
+    l->RInsert(l->root,10);
+    l->RInsert(l->root,40);
+    l->RInsert(l->root,20);
+     l->RInsert(l->root,5);
+    l->Delete(l->root,40);
     l->preorder(l->root);
     return 0;
 }
