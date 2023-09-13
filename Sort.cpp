@@ -29,17 +29,33 @@ void Insertionsort(int A[],int n) {
     }
 
 }
-void Selectionsort(int A[],int n){
-for (int i=0;i<n;i++){
+void Selectionsort(int A[],int n) {
+    for (int i=0; i<n; i++) {
         int k;
-    for (int j=k=i;j<n;j++){
-        if (A[j]<A[k]){
-            k=j;
+        for (int j=k=i; j<n; j++) {
+            if (A[j]<A[k]) {
+                k=j;
+            }
         }
-
+        swap(A[i],A[k]);
     }
-    swap(A[i],A[k]);
 }
+int Partition(int A[],int l,int h) {
+    int pivot=A[l];
+    int i=l;
+    int j=h;
+    do {
+        do {
+            i++;
+        } while (A[i]>pivot);
+        do {
+            j--;
+        } while (A[i]<=pivot);
+        swap(A[i],A[j]);
+
+    } while (i<j);
+    swap(pivot,A[j]);
+    return j;
 }
 int main() {
     int A[5]= {1,30,6,4,21};
