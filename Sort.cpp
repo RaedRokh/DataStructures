@@ -42,24 +42,34 @@ void Selectionsort(int A[],int n) {
 }
 int Partition(int A[],int l,int h) {
     int pivot=A[l];
-    int i=l;
+    int i=l+1;
     int j=h;
     do {
         do {
             i++;
-        } while (A[i]>pivot);
+        } while (A[i]<=pivot);
         do {
             j--;
-        } while (A[i]<=pivot);
+        } while (A[j]>pivot);
+        if (i<j){
         swap(A[i],A[j]);
+        }
 
     } while (i<j);
-    swap(pivot,A[j]);
+    swap(A[l],A[j]);
     return j;
 }
+void Quicksort(int A[],int l,int h){
+int j;
+if (l<h){
+j=Partition(A,l,h);
+Quicksort(A,l,j);
+Quicksort(A,j+1,h);
+}
+}
 int main() {
-    int A[5]= {1,30,6,4,21};
-    Bubblesort(A,5);
+    int A[6]= {1,30,6,4,21,INT32_MAX};
+    Quicksort(A,0,5);
     for (int i=0; i<5; i++) {
         cout<<A[i]<<endl;
     }
