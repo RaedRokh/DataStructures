@@ -17,10 +17,23 @@ void Bubblesort(int A[],int n) {
         }
     }
 }
+void Insertionsort(int A[],int n) {
+    for (int i=1; i<n; i++) {
+        int x=A[i];
+        int j=i-1;
+        while (j>-1 &&x<A[j]) {
+            A[j+1]=A[j];
+            j--;
+        }
+        A[j+1]=x;
+    }
+
+}
+
 int main() {
-    int A[5]={1,3,6,20,21};
+    int A[5]= {1,3,6,20,21};
     Bubblesort(A,5);
-    for (int i=0;i<5;i++){
+    for (int i=0; i<5; i++) {
         cout<<A[i]<<endl;
     }
 
