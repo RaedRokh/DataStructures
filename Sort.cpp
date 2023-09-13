@@ -29,9 +29,20 @@ void Insertionsort(int A[],int n) {
     }
 
 }
+void Selectionsort(int A[],int n){
+for (int i=0;i<n;i++){
+        int k;
+    for (int j=k=i;j<n;j++){
+        if (A[j]<A[k]){
+            k=j;
+        }
 
+    }
+    swap(A[i],A[k]);
+}
+}
 int main() {
-    int A[5]= {1,3,6,20,21};
+    int A[5]= {1,30,6,4,21};
     Bubblesort(A,5);
     for (int i=0; i<5; i++) {
         cout<<A[i]<<endl;
