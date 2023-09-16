@@ -90,20 +90,33 @@ void Merge(Array<int> * A,int l,int mid, int h) {
     for (; j<=h; j++) {
         B->A[k++]=A->A[j];
     }
-    for (int i=0; i<=h; i++) {
+    for (int i=l; i<=h; i++) {
         A->A[i]=B->A[i];
     }
 }
+void Imergesort(Array<int> * A,int n) {
+    int i,p,l,h,mid;
+    for (p=2; p<=n; p=p*2) {
+        for ( i=0; i+p-1<=n; i=i+p) {
+            l=i;
+            h=i+p-1;
+            mid=(l+h)/2;
+                Merge(A,l,mid,h);
+        }
+    }
+    if (p/2<n) {
+        Merge(A,0,p/2,n);
+    }
+
+}
 int main() {
     Array<int> * A=new Array<int>;
-    A->Add(1);
-    A->Add(3);
+
     A->Add(5);
-    A->Add(7);
+        A->Add(6);
+            A->Add(9);
     A->Add(2);
-    A->Add(4);
-    A->Add(6);
-    Merge(A,0,3,6);
+    Imergesort(A,4);
     A->Display();
 
 
