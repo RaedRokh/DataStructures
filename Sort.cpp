@@ -1,4 +1,5 @@
 #include <iostream>
+#include "array.cpp"
 using namespace std;
 
 
@@ -51,28 +52,59 @@ int Partition(int A[],int l,int h) {
         do {
             j--;
         } while (A[j]>pivot);
-        if (i<j){
-        swap(A[i],A[j]);
+        if (i<j) {
+            swap(A[i],A[j]);
         }
 
     } while (i<j);
     swap(A[l],A[j]);
     return j;
 }
-void Quicksort(int A[],int l,int h){
-int j;
-if (l<h){
-j=Partition(A,l,h);
-Quicksort(A,l,j);
-Quicksort(A,j+1,h);
+void Quicksort(int A[],int l,int h) {
+    int j;
+    if (l<h) {
+        j=Partition(A,l,h);
+        Quicksort(A,l,j);
+        Quicksort(A,j+1,h);
+    }
 }
+void Merge(Array<int> * A,int l,int mid, int h) {
+    Array<int> *B=new Array<int>;
+    int i=l;
+    int j=mid+1;
+    int k=l;
+    while (i<=mid && j<=h) {
+
+        if (A->A[i]<A->A[j]) {
+            B->A[k++]=A->A[i++];
+        } else if (A->A[i]>A->A[j]) {
+            B->A[k++]=A->A[j++];
+        } else {
+            B->A[k++]=A->A[j++];
+            i++;
+        }
+    }
+    for (; i<=mid; i++) {
+        B->A[k++]=A->A[i];
+    }
+    for (; j<=h; j++) {
+        B->A[k++]=A->A[j];
+    }
+    for (int i=0; i<=h; i++) {
+        A->A[i]=B->A[i];
+    }
 }
 int main() {
-    int A[6]= {1,30,6,4,21,INT32_MAX};
-    Quicksort(A,0,5);
-    for (int i=0; i<5; i++) {
-        cout<<A[i]<<endl;
-    }
+    Array<int> * A=new Array<int>;
+    A->Add(1);
+    A->Add(3);
+    A->Add(5);
+    A->Add(7);
+    A->Add(2);
+    A->Add(4);
+    A->Add(6);
+    Merge(A,0,3,6);
+    A->Display();
 
 
 
