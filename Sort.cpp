@@ -119,20 +119,54 @@ void Rmergesort(Array<int> * A,int l,int h) {
         Merge(A,l,mid,h);
     }
 }
+int findmax(int A[],int n) {
+    int Max=INT_MIN;
+    for (int i=0; i<n; i++) {
+        if (A[i]>Max) {
+            Max=A[i];
+        }
+    }
+    return Max;
+}
+void countsort(int A[],int n) {
+    int Max=findmax(A,n);
+    int *c=new int[Max+1];
+    for (int i=0; i<Max+1; i++) {
+        c[i]=0;
+    }
+    for (int i=0; i<n; i++) {
+        c[A[i]]++;
+    }
+    int i=0;
+    int j=0;
+    while (i<Max+1) {
+        if (c[i]>0) {
+            A[j++]=i;
+            c[i]--;
+        } else {
+            i++;
+        }
+
+    }
+}
 int main() {
-    Array<int> * A=new Array<int>;
+//    Array<int> * A=new Array<int>;
 
-    A->Add(5);
-    A->Add(1);
-    A->Add(2);
-    A->Add(8);
-    A->Add(3);
-    A->Add(4);
-    A->Add(6);
-    Imergesort(A,7);
+//    A->Add(5);
+//    A->Add(1);
+//    A->Add(2);
+//    A->Add(8);
+//    A->Add(3);
+//    A->Add(4);
+//    A->Add(6);
+    int A[]= {5,1,2,20,3,4,6,7};
+    countsort(A,8);
+//    Imergesort(A,7);
 //    Rmergesort(A,0,6);
-    A->Display();
-
+//    A->Display();
+    for (int i=0; i<8; i++) {
+        cout<<A[i]<<endl;
+    }
 
 
     return 0;
