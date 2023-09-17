@@ -101,7 +101,7 @@ void Imergesort(Array<int> * A,int n) {
             l=i;
             h=i+p-1;
             mid=(l+h)/2;
-                Merge(A,l,mid,h);
+            Merge(A,l,mid,h);
         }
     }
     if (p/2<n) {
@@ -109,14 +109,28 @@ void Imergesort(Array<int> * A,int n) {
     }
 
 }
+void Rmergesort(Array<int> * A,int l,int h) {
+    if (l<h) {
+
+
+        int mid=(l+h)/2;
+        Rmergesort(A,mid+1,h);
+        Rmergesort(A,l,mid);
+        Merge(A,l,mid,h);
+    }
+}
 int main() {
     Array<int> * A=new Array<int>;
 
     A->Add(5);
-        A->Add(6);
-            A->Add(9);
+    A->Add(1);
     A->Add(2);
-    Imergesort(A,4);
+    A->Add(8);
+    A->Add(3);
+    A->Add(4);
+    A->Add(6);
+    Imergesort(A,7);
+//    Rmergesort(A,0,6);
     A->Display();
 
 
