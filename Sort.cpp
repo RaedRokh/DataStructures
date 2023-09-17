@@ -1,5 +1,6 @@
 #include <iostream>
 #include "array.cpp"
+#include "Linkedlist.cpp"
 using namespace std;
 
 
@@ -149,6 +150,22 @@ void countsort(int A[],int n) {
 
     }
 }
+void Shellsort(int A[], int n){
+int gap,i,j,temp;
+for (gap=n/2;gap>=1;gap/=2){
+    for (i=gap;i<n;i++){
+        temp=A[i];
+        j=i-gap;
+        while (j>=0 && A[j]>temp)
+        {
+
+            A[j+gap]=A[j];
+            j=j-gap;
+        }
+        A[j+gap]=temp;
+    }
+}
+}
 int main() {
 //    Array<int> * A=new Array<int>;
 
@@ -160,7 +177,7 @@ int main() {
 //    A->Add(4);
 //    A->Add(6);
     int A[]= {5,1,2,20,3,4,6,7};
-    countsort(A,8);
+    Shellsort(A,8);
 //    Imergesort(A,7);
 //    Rmergesort(A,0,6);
 //    A->Display();

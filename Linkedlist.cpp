@@ -140,10 +140,12 @@ void InsertSorted(int key) {
 }
 
 
-void Delete(int pos) {
+int Delete(int pos) {
+    int x;
     if (pos==0) {
         node *p=first;
         first=first->next;
+        x=p->data;
         delete p;
     } else {
         node *p=first,*q;
@@ -151,9 +153,11 @@ void Delete(int pos) {
             q=p;
             p=p->next;
         }
+        x=p->data;
         q->next=p->next;
         delete p;
     }
+    return x;
 }
 bool isSorted(node *p) {
     if (p==0 || p->next==0) {
@@ -279,13 +283,13 @@ int findmiddle(node*p) {
     return a->data;
 
 }
-int main() {
-
-    int A[]= {1,3,4,5,7};
-    first=create(A,5);
-    Insert(0,0);
-    display(first);
-    return 0;
-}
+//int main() {
+//
+//    int A[]= {1,3,4,5,7};
+//    first=create(A,5);
+//    Insert(0,0);
+//    display(first);
+//    return 0;
+//}
 
 
